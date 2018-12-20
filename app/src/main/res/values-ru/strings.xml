@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Шмотки</string>
+    <string name="action_settings">Настройки</string>
+    <string name="upload_image">Картинка</string>
+    <string name="upload_photo">Фото</string>
+
+    <string name="button_process_picture">Разобрать ...</string>
+    <string name="button_lookup">Искать</string>
+
+    <string name="menu_box_view">Одежда</string>
+
+    <string name="menu_toolbar_settings">Настройки</string>
+    <string name="title_language">Язык</string>
+    <string name="key_language">key_language</string>
+    <string name="summary_language">Выберите язык</string>
+
+    <string name="helper_upload_image_button_text">Здесь вы можете загрузить картинку. Нажмите раз.</string>
+    <string name="helper_upload_image_button_send_text">Нажмите джажды чтобы искать одежду.</string>
+
+</resources>
