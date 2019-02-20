@@ -17,6 +17,9 @@
     <string name="box_image_button">Box Image</string>
     <string name="similar_image_button">Similar Image</string>
 
+    <string name="dialog_upload_search_similar">Search similar objects</string>
+    <string name="dialog_upload_search_box">Search objects</string>
+
     <string name="helper_upload_image_button_text">Here you can select an image. Click once.</string>
     <string name="helper_upload_image_button_send_text">Double click to search parts.</string>
 </resources>

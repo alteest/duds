@@ -1,6 +1,5 @@
 package com.prospero.duds.async;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import com.prospero.duds.MainActivity;
@@ -12,91 +11,72 @@ import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
-public class SearchSimilaritiesTask extends AsyncTask<BoxFragment, Integer, Integer> {
+public class SearchSimilaritiesTask extends HttpTask { //AsyncTask<BoxFragment, Integer, Integer> {
 
-    private JSONArray searchResult = null;
     private String filepath = null;
+    private String attachmentFileName = null;
+    private String attachmentName = null;
     private BoxFragment fragment;
 
     @Override
-    protected Integer doInBackground(BoxFragment... boxFragments) {
-        if (boxFragments.length == 1) {
-            URL obj = null;
-            try {
-                fragment = boxFragments[0];
-                filepath = fragment.getFilepath();
-                if (filepath == null) {
-                    return null;
-                }
-                String attachmentFileName = filepath.substring(filepath.lastIndexOf("/") + 1);
-                String attachmentName = attachmentFileName;
-                if (attachmentFileName.indexOf(".") > 0)
-                    attachmentName = attachmentFileName.substring(0, attachmentFileName.lastIndexOf("."));
-                String crlf = "\r\n";
-                String twoHyphens = "--";
-                String boundary = "***********";
-
-                //obj = new URL(urls[0].getUrl());
-                obj = new URL(MainActivity.baseUrl + "similar/");
-                HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-                con.setUseCaches(false);
-                con.setDoOutput(true);
-
-                //add request header
-                con.setRequestMethod("POST");
-                con.setRequestProperty("User-Agent", "DUDS");
-                con.setRequestProperty("Connection", "Keep-Alive");
-                con.setRequestProperty("Cache-Control", "no-cache");
-                con.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
-
-                // Send post request
-                DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-                wr.writeBytes(twoHyphens + boundary + crlf);
-                wr.writeBytes("Content-Disposition: form-data; name=\"" + attachmentName + "\";filename=\"" + attachmentFileName + "\"" + crlf);
-                wr.writeBytes(crlf);
-                //I want to send only 8 bit black & white bitmaps
-
-                int maxBufferSize = 1 * 1024 * 1024;
-                byte[] buffer = fragment.getBytes();
-                int bufferSize = Math.min(buffer.length, maxBufferSize);
-
-                wr.write(buffer, 0, bufferSize);
-
-                wr.writeBytes(crlf);
-                wr.writeBytes(twoHyphens + boundary + twoHyphens + crlf);
-
-                wr.flush();
-                wr.close();
-
-                int responseCode = con.getResponseCode();
-                //System.out.println("Response Code : " + responseCode);
-
-                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-                String inputLine;
-                StringBuffer response = new StringBuffer();
-
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
-                }
-                in.close();
-                con.disconnect();
-                //System.out.println(response.toString());
-
-                //JSONObject jobj = new JSONObject(response.toString());
-                searchResult = new JSONArray(response.toString());
-                return searchResult.length();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
+    protected Integer setVariables(Object... objects) {
+        fragment = (BoxFragment) objects[0];
+        filepath = fragment.getFilepath();
+        if (filepath == null) {
+            return null;
         }
+        attachmentFileName = filepath.substring(filepath.lastIndexOf("/") + 1);
+        attachmentName = attachmentFileName;
+        if (attachmentFileName.indexOf(".") > 0)
+            attachmentName = attachmentFileName.substring(0, attachmentFileName.lastIndexOf("."));
+        return -1;
+    }
 
-        return null;
+    @Override
+    protected URL getURL() throws MalformedURLException {
+        return new URL(MainActivity.baseUrl + "similar/");
+    }
+
+    @Override
+    protected HttpURLConnection getHttpURLConnection(URL url) throws IOException {
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setUseCaches(false);
+        con.setDoOutput(true);
+
+        //add request header
+        con.setRequestMethod("POST");
+        con.setRequestProperty("User-Agent", "DUDS");
+        con.setRequestProperty("Connection", "Keep-Alive");
+        con.setRequestProperty("Cache-Control", "no-cache");
+        con.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+        return con;
+    }
+
+    @Override
+    protected void sendRequest(HttpURLConnection con) throws IOException {
+        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+        wr.writeBytes(twoHyphens + boundary + crlf);
+        wr.writeBytes("Content-Disposition: form-data; name=\"" + attachmentName + "\";filename=\"" + attachmentFileName + "\"" + crlf);
+        wr.writeBytes(crlf);
+        //I want to send only 8 bit black & white bitmaps
+
+        int maxBufferSize = 1 * 1024 * 1024;
+        byte[] buffer = fragment.getBytes();
+        int bufferSize = Math.min(buffer.length, maxBufferSize);
+
+        wr.write(buffer, 0, bufferSize);
+
+        wr.writeBytes(crlf);
+        wr.writeBytes(twoHyphens + boundary + twoHyphens + crlf);
+
+        wr.flush();
+        wr.close();
     }
 
     protected void onPostExecute(Integer result) {
@@ -105,7 +85,7 @@ public class SearchSimilaritiesTask extends AsyncTask<BoxFragment, Integer, Inte
             try {
                 SimilarFragment fragment = new SimilarFragment();
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("array", searchResult.getJSONArray(0).toString());
+                bundle.putSerializable("array", jsonResponse.getJSONArray(0).toString());
                 fragment.setArguments(bundle);
                 MainActivity.activity.setFragment(fragment);
             } catch (JSONException e) {
@@ -113,5 +93,4 @@ public class SearchSimilaritiesTask extends AsyncTask<BoxFragment, Integer, Inte
             }
         }
     }
-
 }

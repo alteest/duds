@@ -1,5 +1,6 @@
 package com.prospero.duds.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -49,6 +50,7 @@ public class BoxView extends BaseView {
         mImageButton.setImageDrawable(bmd);
     }
 
+    @SuppressLint("WrongThread")
     public byte[] getBytes() {
         ByteArrayOutputStream bytearrayoutputstream = new ByteArrayOutputStream();
         Bitmap bitmap1 = ((BitmapDrawable) mImageButton.getDrawable()).getBitmap();

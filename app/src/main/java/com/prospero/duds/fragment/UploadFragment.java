@@ -102,7 +102,7 @@ public class UploadFragment extends BaseFragment {
 
     @Override
     protected ArrayList<View> getViews() {
-        ArrayList<View> views = new ArrayList<View>();
+        ArrayList<View> views = new ArrayList<>();
         views.add(new UploadImageView(this.getContext()));
         views.add(new UploadPhotoView(this.getContext()));
         return views;
@@ -112,4 +112,5 @@ public class UploadFragment extends BaseFragment {
         UploadView view = (UploadView) mBasePagerAdapter.getView(mViewPager.getCurrentItem());
         return view.getFilepath();
     }
+
 }

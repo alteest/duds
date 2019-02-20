@@ -19,12 +19,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.prospero.duds.activity.SettingsActivity;
+import com.prospero.duds.ao.Label;
+import com.prospero.duds.async.GetLabelsTask;
 import com.prospero.duds.cache.FileCache;
 import com.prospero.duds.fragment.BaseFragment;
 import com.prospero.duds.fragment.UploadFragment;
 import com.prospero.duds.locale.LocaleHelper;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private FileCache mFileCache;
 
     private BottomNavigationView mNavigation = null;
+    private Map<Integer, Label> labels = new HashMap<Integer, Label>();
 
     private int mode;
 
@@ -86,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
             setFragment(new UploadFragment());
         }
         mNavigation = (BottomNavigationView) findViewById(R.id.navigation);
+
+        new GetLabelsTask().execute(this);
     }
 
     @Override
@@ -151,5 +158,8 @@ public class MainActivity extends AppCompatActivity {
 
     public FileCache getFileCache() {
         return mFileCache;
+    }
+    public Map<Integer, Label> getLabels() {
+        return labels;
     }
 }

@@ -14,6 +14,13 @@
     <string name="key_language">key_language</string>
     <string name="summary_language">Выберите язык</string>
 
+    <string name="box_image_button">Объект</string>
+    <string name="similar_image_button">Похожее</string>
+
+    <string name="dialog_upload_search_similar">Искать похожие</string>
+    <string name="dialog_upload_search_box">Искать объекты</string>
+
+
     <string name="helper_upload_image_button_text">Здесь вы можете загрузить картинку. Нажмите раз.</string>
     <string name="helper_upload_image_button_send_text">Нажмите джажды чтобы искать одежду.</string>
 
