@@ -37,6 +37,7 @@ public class SimilarFragment extends BaseFragment {
         }
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,6 +58,7 @@ public class SimilarFragment extends BaseFragment {
                 MainActivity.activity.getNavigation().setSelectedItemId(Menu.FIRST + position);
             }
         });*/
+        mFloatingActionButton.setVisibility(View.VISIBLE);
         return rootView;
     }
 
@@ -66,7 +68,7 @@ public class SimilarFragment extends BaseFragment {
         for (int i = 0; i < jsonArray.length(); i++) {
             try {
                 JSONObject jobj = jsonArray.getJSONObject(i);
-                SimilarView view = new SimilarView(getContext());
+                SimilarView view = new SimilarView(getContext(), this);
                 view.setData(jobj);
                 views.add(view);
             } catch (JSONException e) {

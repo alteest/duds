@@ -19,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/appbar_padding_top"
+        android:visibility="gone"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
@@ -35,11 +36,11 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <!-- android:paddingBottom="58dp" -->
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="58dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
     </FrameLayout>
 

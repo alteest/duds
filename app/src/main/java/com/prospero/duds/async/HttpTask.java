@@ -68,12 +68,15 @@ abstract class HttpTask extends AsyncTask<Object, Integer, Integer> {
                 int responseCode = con.getResponseCode();
                 //System.out.println("Response Code : " + responseCode);
                 StringBuffer response = readResponse(con);
+                MainActivity.appendLog("Processed '" + url.getPath() + "' and returned " + response);
                 return processResponse(response);
             } catch (Exception e) {
                 e.printStackTrace();
+                MainActivity.appendLog(e.toString());
                 return null;
             }
         }
+        MainActivity.appendLog("doRequest doesn't match");
         return null;
     }
 }

@@ -1,10 +1,12 @@
 package com.prospero.duds.view;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import com.prospero.duds.MainActivity;
 import com.prospero.duds.R;
 import com.prospero.duds.async.SearchBoxesTask;
 import com.prospero.duds.async.SearchSimilaritiesTask;
+import com.prospero.duds.fragment.BaseFragment;
 import com.prospero.duds.fragment.BoxFragment;
 import com.prospero.duds.fragment.UploadFragment;
 
@@ -26,8 +29,8 @@ import org.json.JSONObject;
 
 public abstract class UploadView extends BaseView {
 
-    public UploadView(Context context) {
-        super(context);
+    public UploadView(Context context, BaseFragment fragment) {
+        super(context, fragment);
     }
 
     @Override
@@ -51,8 +54,23 @@ public abstract class UploadView extends BaseView {
         builder.build();
     }
 
+    @Override
+    protected void onLayout (boolean changed,
+                             int left,
+                             int top,
+                             int right,
+                             int bottom) {
+        if (getFilepath() == null) {
+            selectImage();
+        }
+        super.onLayout(changed, left, top, right, bottom);
+    }
+
+    protected abstract void selectImage();
+
     public abstract void onActivityResult(Intent data);
 
+    @SuppressLint("RestrictedApi")
     public void setImage(String filepath) {
 
         ViewGroup.LayoutParams params = mImageButton.getLayoutParams();
@@ -63,7 +81,14 @@ public abstract class UploadView extends BaseView {
         setFilepath(filepath);
         mImageButton.setImageBitmap((BitmapFactory.decodeFile(filepath)));
 
-        showShowcaseViews();
+        mFragment.showActionButton();
+        mFragment.mFloatingActionButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                doSearch();
+            }
+        });
+        //showShowcaseViews();
 
         //mShowcaseViews.get("mImageButton").hide();
         //mShowcaseViews.get("mImageButtonSelect").show();

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,8 +9,23 @@
         android:id="@+id/upload_image_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
         android:layout_centerInParent="true"
+        android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        app:srcCompat="@drawable/ic_image_black_24dp" />
-</RelativeLayout>
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/ic_image_black_24dp"
+        android:contentDescription="TODO" />
+
+<!--    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/upload_image_search_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end|center"
+        android:clickable="true"
+        android:focusable="true"
+        android:foregroundGravity="center"
+        android:scaleType="center"
+        app:fabSize="normal"
+        app:backgroundTint="@android:color/transparent"
+        app:srcCompat="@android:drawable/ic_search_category_default" /> -->
+</FrameLayout>

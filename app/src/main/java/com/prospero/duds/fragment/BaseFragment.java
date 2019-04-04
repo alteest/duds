@@ -1,6 +1,9 @@
 package com.prospero.duds.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
@@ -11,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
+import com.prospero.duds.MainActivity;
 import com.prospero.duds.R;
 import com.prospero.duds.view.BaseView;
 
@@ -26,6 +30,7 @@ public abstract class BaseFragment extends Fragment {
 
     private ImageButton leftNav;
     private ImageButton rightNav;
+    public FloatingActionButton mFloatingActionButton;
 
     private ProgressBar progressBarLoad;
 
@@ -64,6 +69,8 @@ public abstract class BaseFragment extends Fragment {
         mDotsTabLayout.setupWithViewPager(mViewPager, true);
         if (views.size() > 4) {
             mDotsTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        } else if (views.size() < 2) {
+            mDotsTabLayout.setVisibility(View.INVISIBLE);
         } else {
             mDotsTabLayout.setTabMode(TabLayout.MODE_FIXED);
         }
@@ -88,6 +95,18 @@ public abstract class BaseFragment extends Fragment {
         progressBarLoad = (ProgressBar) rootView.findViewById(R.id.progress_load);
         hideProgressBar();
 
+        BottomNavigationView navigation = MainActivity.activity.getNavigation();
+        if (views.size() < 2) {
+            navigation.setEnabled(false);
+            navigation.setVisibility(View.GONE);
+        } else {
+            navigation.setEnabled(true);
+            navigation.setVisibility(View.VISIBLE);
+        }
+
+        mFloatingActionButton = (FloatingActionButton) rootView.findViewById(R.id.search_button);
+        mFloatingActionButton.bringToFront();
+
         toggleNavigationVisibility(mViewPager.getCurrentItem());
 
         return rootView;
@@ -106,7 +125,6 @@ public abstract class BaseFragment extends Fragment {
         } else {
             leftNav.setVisibility(View.VISIBLE);
         }
-
     }
 
     public void showProgressBar() {
@@ -115,5 +133,15 @@ public abstract class BaseFragment extends Fragment {
 
     public void hideProgressBar() {
         progressBarLoad.setVisibility(View.GONE);
+    }
+
+    @SuppressLint("RestrictedApi")
+    public void showActionButton() {
+        mFloatingActionButton.setVisibility(View.VISIBLE);
+    }
+
+    @SuppressLint("RestrictedApi")
+    public void hideActionButton() {
+        mFloatingActionButton.setVisibility(View.GONE);
     }
 }

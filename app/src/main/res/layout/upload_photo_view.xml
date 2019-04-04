@@ -14,4 +14,17 @@
         android:layout_centerInParent="true"
         android:background="@android:color/transparent"
         app:srcCompat="@drawable/ic_photo_camera_black_24dp"/>
+
+<!--    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/upload_photo_search_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end|center"
+        android:clickable="true"
+        android:focusable="true"
+        android:foregroundGravity="center"
+        android:scaleType="center"
+        app:fabSize="normal"
+        app:backgroundTint="@android:color/transparent"
+        app:srcCompat="@android:drawable/ic_search_category_default" /> -->
 </RelativeLayout>

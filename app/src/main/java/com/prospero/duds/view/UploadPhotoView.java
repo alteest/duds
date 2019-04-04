@@ -1,12 +1,14 @@
 package com.prospero.duds.view;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +22,7 @@ import com.prospero.duds.MainActivity;
 import com.prospero.duds.R;
 import com.prospero.duds.button.DoubleClick;
 import com.prospero.duds.button.DoubleClickListener;
+import com.prospero.duds.fragment.BaseFragment;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,10 +35,12 @@ public class UploadPhotoView extends UploadView {
 
     ShowcaseView view;
 
-    public UploadPhotoView(Context context) {
-        super(context);
+    @SuppressLint("RestrictedApi")
+    public UploadPhotoView(Context context, BaseFragment fragment) {
+        super(context, fragment);
 
         mImageButton = (ImageButton) findViewById(R.id.upload_photo_button);
+        /*
         mImageButton.setOnClickListener(new DoubleClick(new DoubleClickListener() {
             @Override
             public void onSingleClick(View view) {
@@ -66,6 +71,14 @@ public class UploadPhotoView extends UploadView {
                 doSearch();
             }
         }));
+        */
+
+        mImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectImage();
+            }
+        });
 
         /*mImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,8 +125,31 @@ public class UploadPhotoView extends UploadView {
                 .build();
     }
 
-
     @Override
+    protected void selectImage() {
+        MainActivity.activity.validatePermission(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE});
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (intent.resolveActivity(MainActivity.activity.getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(view.getContext(),
+                        "com.prospero.duds.fileprovider",
+                        photoFile);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                MainActivity.activity.getCurrentFragment().startActivityForResult(intent, 1);
+            }
+        }
+    }
+
+        @Override
     protected int getLayoutResource() {
         return R.layout.upload_photo_view;
     }
@@ -149,7 +185,7 @@ public class UploadPhotoView extends UploadView {
                 new MediaScannerConnection.OnScanCompletedListener() {
                     @Override
                     public void onScanCompleted(String path, Uri uri) {
-                        Log.v("grokkingandroid",
+                        Log.v("duds",
                                 "file " + path + " was scanned seccessfully: " + uri);
                     }
                 });

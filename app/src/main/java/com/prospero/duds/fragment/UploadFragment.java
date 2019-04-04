@@ -1,5 +1,6 @@
 package com.prospero.duds.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -47,44 +48,46 @@ public class UploadFragment extends BaseFragment {
         }
     };
 
+    @SuppressLint("RestrictedApi")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         mDotsTabLayout.setVisibility(View.INVISIBLE);
 
-        BottomNavigationView navigation = MainActivity.activity.getNavigation();
-        navigation.setEnabled(true);
-        navigation.setVisibility(View.VISIBLE);
-        navigation.getMenu().clear();
-        navigation.inflateMenu(R.menu.upload_menu);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        if (views.size() > 1) {
+            BottomNavigationView navigation = MainActivity.activity.getNavigation();
+            navigation.getMenu().clear();
+            navigation.inflateMenu(R.menu.upload_menu);
+            navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            public void onPageScrollStateChanged(int state) {
-                if (state == ViewPager.SCROLL_STATE_IDLE) {
-                    BaseView view = (BaseView) views.get(mViewPager.getCurrentItem());
-                    view.showShowcaseViews();
+            mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                public void onPageScrollStateChanged(int state) {
+                    if (state == ViewPager.SCROLL_STATE_IDLE) {
+                        BaseView view = (BaseView) views.get(mViewPager.getCurrentItem());
+                        //view.showShowcaseViews();
+                    }
                 }
-            }
 
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
-            public void onPageSelected(int position) {
-                switch (position) {
-                    case 0:
-                        MainActivity.activity.getNavigation().setSelectedItemId(R.id.navigation_image);
-                        return;
-                    case 1:
-                        MainActivity.activity.getNavigation().setSelectedItemId(R.id.navigation_photo);
-                        return;
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 }
-            }
-        });
-        ((BaseView) views.get(mViewPager.getCurrentItem())).showShowcaseViews();
 
-        //mBasePagerAdapter.notifyDataSetChanged();
+                public void onPageSelected(int position) {
+                    switch (position) {
+                        case 0:
+                            MainActivity.activity.getNavigation().setSelectedItemId(R.id.navigation_image);
+                            return;
+                        case 1:
+                            MainActivity.activity.getNavigation().setSelectedItemId(R.id.navigation_photo);
+                            return;
+                    }
+                }
+            });
+            //((BaseView) views.get(mViewPager.getCurrentItem())).showShowcaseViews();
+
+            //mBasePagerAdapter.notifyDataSetChanged();
+        }
+        mFloatingActionButton.setVisibility(View.VISIBLE);
         return rootView;
     }
 
@@ -95,7 +98,12 @@ public class UploadFragment extends BaseFragment {
         }
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            UploadView view = (UploadView) mBasePagerAdapter.getView(mViewPager.getCurrentItem());
+            UploadView view = null;
+            if (views.size() == 1) {
+                view = (UploadView) views.get(0);
+            } else {
+                view = (UploadView) mBasePagerAdapter.getView(mViewPager.getCurrentItem());
+            }
             view.onActivityResult(data);
         }
     }
@@ -103,8 +111,8 @@ public class UploadFragment extends BaseFragment {
     @Override
     protected ArrayList<View> getViews() {
         ArrayList<View> views = new ArrayList<>();
-        views.add(new UploadImageView(this.getContext()));
-        views.add(new UploadPhotoView(this.getContext()));
+        views.add(new UploadImageView(this.getContext(), this));
+        views.add(new UploadPhotoView(this.getContext(), this));
         return views;
     }
 

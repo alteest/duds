@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
@@ -15,15 +16,20 @@ import com.prospero.duds.ao.Box;
 import com.prospero.duds.async.SearchSimilaritiesTask;
 import com.prospero.duds.button.DoubleClick;
 import com.prospero.duds.button.DoubleClickListener;
+import com.prospero.duds.fragment.BaseFragment;
 import com.prospero.duds.fragment.BoxFragment;
 
 import java.io.ByteArrayOutputStream;
 
 public class BoxView extends BaseView {
 
-    public BoxView(Context context) {
-        super(context);
+    protected FloatingActionButton mActionButton = null;
+
+    @SuppressLint("RestrictedApi")
+    public BoxView(Context context, BaseFragment fragment) {
+        super(context, fragment);
         mImageButton = (ImageButton) findViewById(R.id.box_image_button);
+        /*
         mImageButton.setOnClickListener(new DoubleClick(new DoubleClickListener() {
             @Override
             public void onSingleClick(View view) {
@@ -36,6 +42,27 @@ public class BoxView extends BaseView {
                 new SearchSimilaritiesTask().execute(fragment);
             }
         }));
+        */
+    }
+
+    @Override
+    protected void onLayout (boolean changed,
+                             int left,
+                             int top,
+                             int right,
+                             int bottom) {
+        if (changed) {
+            mFragment.showActionButton();
+            mFragment.mFloatingActionButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //BoxFragment fragment = (BoxFragment) MainActivity.activity.getCurrentFragment();
+                    mFragment.showProgressBar();
+                    new SearchSimilaritiesTask().execute(mFragment);
+                }
+            });
+        }
+        super.onLayout(changed, left, top, right, bottom);
     }
 
     @Override
@@ -43,11 +70,13 @@ public class BoxView extends BaseView {
         return R.layout.box_view;
     }
 
+    @SuppressLint("RestrictedApi")
     public void setImage(Box box) {
         Bitmap boxBitmap = Bitmap.createBitmap(BitmapFactory.decodeFile(mFilepath),
                 box.x1, box.y1, box.x2 - box.x1, box.y2 - box.y1);
         BitmapDrawable bmd = new BitmapDrawable(boxBitmap);
         mImageButton.setImageDrawable(bmd);
+        //mActionButton.setVisibility(View.VISIBLE);
     }
 
     @SuppressLint("WrongThread")

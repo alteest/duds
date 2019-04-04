@@ -16,6 +16,11 @@
 
     <string name="box_image_button">Объект</string>
     <string name="similar_image_button">Похожее</string>
+    <string name="startup_button_about">О программе</string>
+    <string name="startup_button_share">Поделиться</string>
+    <string name="startup_button_settings">Настройки</string>
+    <string name="startup_button_photo">Сделать фото</string>
+    <string name="startup_button_picture">Загрузить картинку</string>
 
     <string name="dialog_upload_search_similar">Искать похожие</string>
     <string name="dialog_upload_search_box">Искать объекты</string>

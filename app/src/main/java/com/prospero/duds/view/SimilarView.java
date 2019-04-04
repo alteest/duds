@@ -1,10 +1,12 @@
 package com.prospero.duds.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.net.Uri;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
@@ -15,6 +17,7 @@ import com.prospero.duds.R;
 import com.prospero.duds.async.GetSimilarImageTask;
 import com.prospero.duds.button.DoubleClick;
 import com.prospero.duds.button.DoubleClickListener;
+import com.prospero.duds.fragment.BaseFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,8 +33,9 @@ public class SimilarView extends BaseView {
     protected String store = null;
     protected float distance = -1;
 
-    public SimilarView(Context context) {
-        super(context);
+    @SuppressLint("RestrictedApi")
+    public SimilarView(Context context, BaseFragment fragment) {
+        super(context, fragment);
         last = System.currentTimeMillis();
         mImageButton = (ImageButton) findViewById(R.id.similar_image);
         mProgressBar = (ProgressBar) findViewById(R.id.progress_similar);
@@ -52,6 +56,7 @@ public class SimilarView extends BaseView {
                 last = pressTime;
             }
         });*/
+        /*
         mImageButton.setOnClickListener(new DoubleClick(new DoubleClickListener() {
             @Override
             public void onSingleClick(View view) {
@@ -63,6 +68,26 @@ public class SimilarView extends BaseView {
                 MainActivity.activity.startActivity(browserIntent);
             }
         }));
+        */
+    }
+
+    @Override
+    protected void onLayout (boolean changed,
+                             int left,
+                             int top,
+                             int right,
+                             int bottom) {
+        if (changed) {
+            mFragment.showActionButton();
+            mFragment.mFloatingActionButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    MainActivity.activity.startActivity(browserIntent);
+                }
+            });
+        }
+        super.onLayout(changed, left, top, right, bottom);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.prospero.duds.view;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -11,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +25,7 @@ import com.prospero.duds.MainActivity;
 import com.prospero.duds.R;
 import com.prospero.duds.button.DoubleClick;
 import com.prospero.duds.button.DoubleClickListener;
+import com.prospero.duds.fragment.BaseFragment;
 
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 import uk.co.deanwild.materialshowcaseview.target.Target;
@@ -31,11 +34,12 @@ public class UploadImageView extends UploadView {
     private MaterialShowcaseView.Builder mShowcaseViewBuilder;
     private MaterialShowcaseView mShowcaseView;
 
-    public UploadImageView(Context context) {
-        super(context);
+    @SuppressLint("RestrictedApi")
+    public UploadImageView(Context context, BaseFragment fragment) {
+        super(context, fragment);
 
         mImageButton = (ImageButton) findViewById(R.id.upload_image_button);
-        mImageButton.setOnClickListener(new DoubleClick(new DoubleClickListener() {
+/*        mImageButton.setOnClickListener(new DoubleClick(new DoubleClickListener() {
             @Override
             public void onSingleClick(View view) {
                 MainActivity.activity.validatePermission(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE});
@@ -49,15 +53,13 @@ public class UploadImageView extends UploadView {
                 doSearch();
             }
         }));
-        /*mImageButton.setOnClickListener(new View.OnClickListener() {
+*/
+        mImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.activity.validatePermission(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE});
-                Intent intent = new Intent(Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                MainActivity.activity.getCurrentFragment().startActivityForResult(intent, 1);
+                selectImage();
             }
-        });*/
+        });
     }
 
     public void showShowcaseViews2() {
@@ -84,6 +86,15 @@ public class UploadImageView extends UploadView {
                 //.setContentTextPaint(paint)
                 .hideOnTouchOutside()
                 .build());*/
+
+
+    @Override
+    protected void selectImage() {
+        MainActivity.activity.validatePermission(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE});
+        Intent intent = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        MainActivity.activity.getCurrentFragment().startActivityForResult(intent, 1);
+    }
 
     @Override
     public void setImage(String filepath) {

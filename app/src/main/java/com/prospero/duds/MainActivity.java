@@ -14,7 +14,6 @@ import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -23,10 +22,14 @@ import com.prospero.duds.ao.Label;
 import com.prospero.duds.async.GetLabelsTask;
 import com.prospero.duds.cache.FileCache;
 import com.prospero.duds.fragment.BaseFragment;
+import com.prospero.duds.fragment.StartupFragment;
 import com.prospero.duds.fragment.UploadFragment;
 import com.prospero.duds.locale.LocaleHelper;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,12 +40,13 @@ public class MainActivity extends AppCompatActivity {
     public static final int SIMILAR = 2;
 
     public static MainActivity activity;
-    public static String baseUrl = "http://52.166.124.125/review/";
+    //public static String baseUrl = "http://52.166.124.125/review/";
+    public static String baseUrl = "http://134.209.204.54/api/";
 
     private FileCache mFileCache;
 
     private BottomNavigationView mNavigation = null;
-    private Map<Integer, Label> labels = new HashMap<Integer, Label>();
+    private Map<Integer, Label> labels = new HashMap<>();
 
     private int mode;
 
@@ -66,9 +70,11 @@ public class MainActivity extends AppCompatActivity {
         mFileCache = new FileCache(getApplicationContext());
         mFileCache.list();
         mFileCache.clear();
+
         LocaleHelper.onAttach(this);
         setContentView(R.layout.main);
 
+        /*
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -79,20 +85,21 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                         return true;
                 }
-
                 return false;
             }
         });
+        */
 
         BaseFragment currentFragment = getCurrentFragment();
         //if ((currentFragment == null) || (currentFragment.getClass() != UploadFragment.class)) {
             // TODO use current fragment if (currentFragment == null) {
-            if (currentFragment == null) {
-            setFragment(new UploadFragment());
+        if (currentFragment == null) {
+            //setFragment(new UploadFragment());
+            setFragment(new StartupFragment());
         }
         mNavigation = (BottomNavigationView) findViewById(R.id.navigation);
 
-        new GetLabelsTask().execute(this);
+        //new GetLabelsTask().execute(this);
     }
 
     @Override
@@ -161,5 +168,35 @@ public class MainActivity extends AppCompatActivity {
     }
     public Map<Integer, Label> getLabels() {
         return labels;
+    }
+
+    public static void appendLog(String text)
+    {
+        File logFile = new File("sdcard/log.file");
+        if (!logFile.exists())
+        {
+            try
+            {
+                logFile.createNewFile();
+            }
+            catch (IOException e)
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        try
+        {
+            //BufferedWriter for performance, true to set append to file flag
+            BufferedWriter buf = new BufferedWriter(new FileWriter(logFile, true));
+            buf.append(text);
+            buf.newLine();
+            buf.close();
+        }
+        catch (IOException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }

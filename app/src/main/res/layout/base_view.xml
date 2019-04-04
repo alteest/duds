@@ -20,7 +20,7 @@
         android:layout_height="48dp"
         android:layout_gravity="center_vertical|start"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_chevron_left_black_24dp" />
+        app:srcCompat="@drawable/ic_chevron_left_black_24dp" />
 
     <ImageButton
         android:id="@+id/right_nav"
@@ -28,7 +28,7 @@
         android:layout_height="48dp"
         android:layout_gravity="center_vertical|end"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_chevron_right_black_24dp" />
+        app:srcCompat="@drawable/ic_chevron_right_black_24dp" />
 
     <ProgressBar
         android:id="@+id/progress_load"
@@ -46,5 +46,19 @@
         app:tabBackground="@drawable/dot_tab_selector"
         app:tabGravity="center"
         app:tabIndicatorHeight="0dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/search_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end|center"
+        android:clickable="true"
+        android:focusable="true"
+        android:foregroundGravity="center"
+        android:scaleType="center"
+        android:visibility="gone"
+        app:fabSize="normal"
+        app:backgroundTint="@android:color/transparent"
+        app:srcCompat="@android:drawable/ic_search_category_default" />
 
 </FrameLayout>

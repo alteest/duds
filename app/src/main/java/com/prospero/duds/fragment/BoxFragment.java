@@ -57,6 +57,7 @@ public class BoxFragment extends BaseFragment {
         }
     };
 
+    @SuppressLint("RestrictedApi")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -89,6 +90,7 @@ public class BoxFragment extends BaseFragment {
                     MainActivity.activity.getNavigation().setSelectedItemId(Menu.FIRST + position);
             }
         });*/
+        mFloatingActionButton.setVisibility(View.VISIBLE);
         return rootView;
     }
 
@@ -99,7 +101,7 @@ public class BoxFragment extends BaseFragment {
             for (int i = 0; i < jsonArray.length(); i++) {
                 try {
                     JSONObject jobj = jsonArray.getJSONObject(i);
-                    BoxView view = new BoxView(getContext());
+                    BoxView view = new BoxView(getContext(), this);
                     view.setFilepath(filepath);
                     view.setImage(new Box(jobj));
                     views.add(view);
