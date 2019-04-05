@@ -38,27 +38,38 @@
         android:layout_gravity="center_horizontal|center_vertical"
         android:indeterminateDrawable="@drawable/progress"/>
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/dots_tab_layout"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|bottom"
+        android:layout_gravity="bottom|center">
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/dots_tab_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|bottom"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@id/search_button"
         app:tabBackground="@drawable/dot_tab_selector"
         app:tabGravity="center"
         app:tabIndicatorHeight="0dp" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/search_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end|center"
-        android:clickable="true"
-        android:focusable="true"
-        android:foregroundGravity="center"
-        android:scaleType="center"
-        android:visibility="gone"
-        app:fabSize="normal"
-        app:backgroundTint="@android:color/transparent"
-        app:srcCompat="@android:drawable/ic_search_category_default" />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/search_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="bottom|end"
+            android:foregroundGravity="center"
+            android:scaleType="center"
+            android:visibility="gone"
+            app:backgroundTint="@android:color/transparent"
+            app:fabSize="normal"
+            app:elevation="0dp"
+            app:pressedTranslationZ="0dp"
+            app:srcCompat="@android:drawable/ic_search_category_default" />
 
+    </RelativeLayout>
 </FrameLayout>

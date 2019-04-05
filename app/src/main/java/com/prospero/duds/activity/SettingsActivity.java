@@ -46,6 +46,7 @@ public final class SettingsActivity extends PreferenceActivity {
             addPreferencesFromResource(R.xml.settings);
 
             bindPreferenceSummaryToValue(findPreference(getString(R.string.key_language)));
+            bindPreferenceClick(findPreference("clear_cache"));
         }
     }
 
@@ -56,6 +57,11 @@ public final class SettingsActivity extends PreferenceActivity {
                 PreferenceManager
                         .getDefaultSharedPreferences(preference.getContext())
                         .getString(preference.getKey(), ""));
+    }
+
+    private static void bindPreferenceClick(Preference preference) {
+        preference.setOnPreferenceClickListener(sBindPreferenceClickListener);
+        //sBindPreferenceClickListener.onPreferenceClick(preference);
     }
 
     private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
@@ -79,6 +85,14 @@ public final class SettingsActivity extends PreferenceActivity {
             } else {
                 preference.setSummary(stringValue);
             }
+            return true;
+        }
+    };
+
+    private static Preference.OnPreferenceClickListener sBindPreferenceClickListener = new Preference.OnPreferenceClickListener() {
+        @Override
+        public boolean onPreferenceClick(Preference preference) {
+            MainActivity.activity.getFileCache().clear();
             return true;
         }
     };

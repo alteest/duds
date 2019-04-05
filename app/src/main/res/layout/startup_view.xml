@@ -23,6 +23,7 @@
         android:layout_gravity="bottom|center"
         android:foregroundGravity="center"
         android:gravity="center"
+        android:textColor="@android:color/white"
         android:text="@string/startup_button_picture" />
 
     <Button
@@ -32,6 +33,7 @@
         android:layout_gravity="bottom|center"
         android:foregroundGravity="center"
         android:gravity="center"
+        android:textColor="@android:color/white"
         android:text="@string/startup_button_photo" />
 
     <Button
@@ -41,6 +43,7 @@
         android:layout_gravity="bottom|center"
         android:foregroundGravity="center"
         android:gravity="center"
+        android:textColor="@android:color/white"
         android:text="@string/startup_button_settings" />
 
     <Button
@@ -50,6 +53,8 @@
         android:layout_gravity="bottom|center"
         android:foregroundGravity="center"
         android:gravity="center"
+        android:visibility="gone"
+        android:textColor="@android:color/white"
         android:text="@string/startup_button_share" />
 
     <Button
@@ -59,6 +64,7 @@
         android:layout_gravity="bottom|center"
         android:foregroundGravity="center"
         android:gravity="center"
+        android:textColor="@android:color/white"
         android:text="@string/startup_button_about" />
     </LinearLayout>
 </LinearLayout>

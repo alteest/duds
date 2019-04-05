@@ -29,11 +29,14 @@ import com.prospero.duds.fragment.UploadPhotoFragment;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StartupView extends LinearLayout {
 
     Drawable drawableButtons = null;
 
+    @SuppressLint("ClickableViewAccessibility")
     public StartupView(Context context) {
         super(context);
         LayoutInflater mInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -174,23 +177,41 @@ public class StartupView extends LinearLayout {
         int h = getHeight();
         //int w = drawable.getIntrinsicWidth();
         //int h = drawable.getIntrinsicHeight();
-        int h1 = getPercentPixels(h, 1);
-        int h11 = getPercentPixels(h, 11);
+        int border = getPercentPixels(h, 1);
+        int buttonHeight = getPercentPixels(h, 11);
+        int pos = 0;
 
+        List<Integer> buttons = new ArrayList<>();
+        buttons.add(R.id.startup_button_about);
+        buttons.add(R.id.startup_button_share);
+        buttons.add(R.id.startup_button_settings);
+        buttons.add(R.id.startup_button_photo);
+        buttons.add(R.id.startup_button_picture);
+        Button button;
+        for (Integer res: buttons) {
+            button = (Button) findViewById(res);
+            if (button.getVisibility() == VISIBLE) {
+                changeButton(button, buttonHeight, border, w, h, pos);
+                pos += 1;
+            }
+        }
+
+        /*
         Button buttonAbout = (Button) findViewById(R.id.startup_button_about);
-        changeButton(buttonAbout, h11, h1, w, h, 0);
+        changeButton(buttonAbout, buttonHeight, border, w, h, 0);
 
         Button buttonShare = (Button) findViewById(R.id.startup_button_share);
-        changeButton(buttonShare, h11, h1, w, h, 1);
+        changeButton(buttonShare, buttonHeight, border, w, h, 1);
 
         Button buttonSettings = (Button) findViewById(R.id.startup_button_settings);
-        changeButton(buttonSettings, h11, h1, w, h, 2);
+        changeButton(buttonSettings, buttonHeight, border, w, h, 2);
 
         Button buttonPhoto = (Button) findViewById(R.id.startup_button_photo);
-        changeButton(buttonPhoto, h11, h1, w, h, 3);
+        changeButton(buttonPhoto, buttonHeight, border, w, h, 3);
 
         Button buttonPicture = (Button) findViewById(R.id.startup_button_picture);
-        changeButton(buttonPicture, h11, h1, w, h, 4);
+        changeButton(buttonPicture, buttonHeight, border, w, h, 4);
+        */
     }
 
     protected void changeButton(Button button, int buttonHeight, int margin, int width, int height, int pos) {
@@ -225,6 +246,7 @@ public class StartupView extends LinearLayout {
         Bitmap boxBitmap = Bitmap.createBitmap(bitmap, x0, y0, x1 - x0, y1 - y0);
         BitmapDrawable bmd = new BitmapDrawable(getResources(), boxBitmap);
 
+        /*
         try {
             File path = Environment.getExternalStoragePublicDirectory("DudsFileCache");
             if (!path.exists()) {
@@ -237,6 +259,7 @@ public class StartupView extends LinearLayout {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        */
         return bmd;
     }
 

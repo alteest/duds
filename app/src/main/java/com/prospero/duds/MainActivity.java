@@ -68,8 +68,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activity = this;
         mFileCache = new FileCache(getApplicationContext());
-        mFileCache.list();
-        mFileCache.clear();
+        //mFileCache.list();
+        //mFileCache.clear();
 
         LocaleHelper.onAttach(this);
         setContentView(R.layout.main);

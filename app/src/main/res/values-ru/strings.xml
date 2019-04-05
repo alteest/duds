@@ -13,6 +13,7 @@
     <string name="title_language">Язык</string>
     <string name="key_language">key_language</string>
     <string name="summary_language">Выберите язык</string>
+    <string name="clear_cache">Очистить кеш</string>
 
     <string name="box_image_button">Объект</string>
     <string name="similar_image_button">Похожее</string>

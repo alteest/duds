@@ -11,5 +11,9 @@
             android:summary="@string/summary_language"
             android:title="@string/title_language" />
 
+        <Preference
+            android:layout="@layout/clear_cache"
+            android:key="clear_cache" />
+
     </PreferenceCategory>
 </PreferenceScreen>
