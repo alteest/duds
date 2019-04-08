@@ -61,11 +61,12 @@ public class StartupView extends LinearLayout {
                         animate.setDuration(500);
                         animate.setFillAfter(true);
                         buttonsLayout.startAnimation(animate);
-                        System.out.println("Action was DOWN");
+                        //System.out.println("Action was DOWN");
                         return true;
-                    case (MotionEvent.ACTION_MOVE):
+                    /*case (MotionEvent.ACTION_MOVE):
                         System.out.println("Action was MOVE");
                         return true;
+                        */
                     case (MotionEvent.ACTION_UP):
                         buttonsLayout.setVisibility(View.VISIBLE);
                         animate = new TranslateAnimation(
@@ -76,15 +77,16 @@ public class StartupView extends LinearLayout {
                         animate.setDuration(500);
                         animate.setFillAfter(true);
                         buttonsLayout.startAnimation(animate);
-                        System.out.println("Action was UP");
+                        //System.out.println("Action was UP");
                         return true;
-                    case (MotionEvent.ACTION_CANCEL):
+                    /* case (MotionEvent.ACTION_CANCEL):
                         System.out.println("Action was CANCEL");
                         return true;
                     case (MotionEvent.ACTION_OUTSIDE):
                         System.out.println("Movement occurred outside bounds " +
                                 "of current screen element");
                         return true;
+                        */
                     default:
                         return false;
                 }

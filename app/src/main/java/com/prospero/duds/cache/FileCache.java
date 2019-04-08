@@ -50,10 +50,22 @@ public class FileCache {
         File[] files = mCacheDir.listFiles();
         if (files != null) {
             for (File f : files) {
-                f.delete();
+                deleteFile(f);
             }
         }
     }
+
+    private void deleteFile(File file) {
+        if (file.isDirectory()) {
+            for (File f : file.listFiles()) {
+                deleteFile(f);
+            }
+        } else if (file.isFile()) {
+            boolean result = file.delete();
+            System.out.println("Delete file result : " + Boolean.toString(result));
+        }
+    }
+
 
     public void list(){
         File[] files = mCacheDir.listFiles();

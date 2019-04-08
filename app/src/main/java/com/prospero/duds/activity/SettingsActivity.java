@@ -8,6 +8,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatDelegate;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -46,11 +47,11 @@ public final class SettingsActivity extends PreferenceActivity {
             addPreferencesFromResource(R.xml.settings);
 
             bindPreferenceSummaryToValue(findPreference(getString(R.string.key_language)));
-            bindPreferenceClick(findPreference("clear_cache"));
+            bindPreferenceClick(findPreference(getString(R.string.clear_cache)));
         }
     }
 
-    private static void bindPreferenceSummaryToValue(Preference preference) {
+    private static void bindPreferenceSummaryToValue(@NonNull Preference preference) {
         preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
 
         sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
@@ -59,14 +60,14 @@ public final class SettingsActivity extends PreferenceActivity {
                         .getString(preference.getKey(), ""));
     }
 
-    private static void bindPreferenceClick(Preference preference) {
+    private static void bindPreferenceClick(@NonNull Preference preference) {
         preference.setOnPreferenceClickListener(sBindPreferenceClickListener);
         //sBindPreferenceClickListener.onPreferenceClick(preference);
     }
 
     private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
         @Override
-        public boolean onPreferenceChange(Preference preference, Object newValue) {
+        public boolean onPreferenceChange(Preference preference, @NonNull Object newValue) {
             String stringValue = newValue.toString();
 
             if (preference instanceof ListPreference) {

@@ -1,11 +1,8 @@
 <resources>
-    <string name="app_name">Шмотки</string>
+    <string name="app_name">Duds</string>
     <string name="action_settings">Настройки</string>
     <string name="upload_image">Картинка</string>
     <string name="upload_photo">Фото</string>
-
-    <string name="button_process_picture">Разобрать ...</string>
-    <string name="button_lookup">Искать</string>
 
     <string name="menu_box_view">Одежда</string>
 
