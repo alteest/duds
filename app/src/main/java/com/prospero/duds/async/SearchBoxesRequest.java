@@ -1,8 +1,8 @@
 package com.prospero.duds.async;
 
-public class SearchBoxesRequest {
-    protected String url;
-    protected String filepath;
+class SearchBoxesRequest {
+    private String url;
+    private String filepath;
 
     public SearchBoxesRequest(String url, String filepath) {
         this.url = url;

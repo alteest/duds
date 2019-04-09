@@ -1,13 +1,10 @@
 package com.prospero.duds.view;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.net.Uri;
-import android.support.design.widget.FloatingActionButton;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
@@ -15,8 +12,6 @@ import android.widget.ProgressBar;
 import com.prospero.duds.MainActivity;
 import com.prospero.duds.R;
 import com.prospero.duds.async.GetSimilarImageTask;
-import com.prospero.duds.button.DoubleClick;
-import com.prospero.duds.button.DoubleClickListener;
 import com.prospero.duds.fragment.BaseFragment;
 
 import org.json.JSONException;
@@ -26,17 +21,14 @@ public class SimilarView extends BaseView {
 
     private ProgressBar mProgressBar;
 
-    private long last;
-
     protected String filename = null;
     protected String url = null;
     protected String store = null;
     protected float distance = -1;
 
     @SuppressLint("RestrictedApi")
-    public SimilarView(Context context, BaseFragment fragment) {
-        super(context, fragment);
-        last = System.currentTimeMillis();
+    public SimilarView(BaseFragment fragment) {
+        super(fragment);
         mImageButton = (ImageButton) findViewById(R.id.similar_image);
         mProgressBar = (ProgressBar) findViewById(R.id.progress_similar);
         hideProgressBar();
@@ -107,13 +99,13 @@ public class SimilarView extends BaseView {
             new GetSimilarImageTask().execute(this);
         }
     }
-    public void setData(JSONObject jobj) {
+    public void setData(JSONObject jsonObj) {
         // {"distance":0.019811499598460822,"name":"MP002XW0F50U_5768008_1_v1.jpeg","url":"https://www.lamoda.ru/p/mp002xw0f50u/clothes-panda-plate/"}
         try {
-            url = jobj.getString("url");
-            filename = jobj.getString("name");
-            distance = jobj.getLong("distance");
-            store = jobj.getString("store");
+            url = jsonObj.getString("url");
+            filename = jsonObj.getString("name");
+            distance = jsonObj.getLong("distance");
+            store = jsonObj.getString("store");
             getImage();
         } catch (JSONException e) {
             e.printStackTrace();

@@ -1,20 +1,16 @@
 package com.prospero.duds.async;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import com.prospero.duds.MainActivity;
 import com.prospero.duds.fragment.UploadFragment;
 import com.prospero.duds.fragment.BoxFragment;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -71,7 +67,7 @@ public class SearchBoxesTask extends HttpTask { //} AsyncTask<UploadFragment, In
         FileInputStream fileStream = new FileInputStream(filepath);
         int bytesAvailable = fileStream.available(); // create a buffer of
 
-        int maxBufferSize = 1 * 1024 * 1024;
+        int maxBufferSize = 1024 * 1024;
         int bufferSize = Math.min(bytesAvailable, maxBufferSize);
         byte[] buffer = new byte[bufferSize];
 

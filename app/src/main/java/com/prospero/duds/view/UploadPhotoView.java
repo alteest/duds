@@ -2,13 +2,11 @@ package com.prospero.duds.view;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.View;
@@ -20,8 +18,6 @@ import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
 import com.prospero.duds.MainActivity;
 import com.prospero.duds.R;
-import com.prospero.duds.button.DoubleClick;
-import com.prospero.duds.button.DoubleClickListener;
 import com.prospero.duds.fragment.BaseFragment;
 
 import java.io.File;
@@ -36,8 +32,8 @@ public class UploadPhotoView extends UploadView {
     ShowcaseView view;
 
     @SuppressLint("RestrictedApi")
-    public UploadPhotoView(Context context, BaseFragment fragment) {
-        super(context, fragment);
+    public UploadPhotoView(BaseFragment fragment) {
+        super(fragment);
 
         mImageButton = (ImageButton) findViewById(R.id.upload_photo_button);
         /*
@@ -186,7 +182,7 @@ public class UploadPhotoView extends UploadView {
                     @Override
                     public void onScanCompleted(String path, Uri uri) {
                         Log.v("duds",
-                                "file " + path + " was scanned seccessfully: " + uri);
+                                "file " + path + " was scanned successfully: " + uri);
                     }
                 });
         /*Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);

@@ -10,10 +10,11 @@ import java.io.OutputStream;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
 
 public class FileCache {
 
-    final int REQUIRED_SIZE=1024;
+    private final int REQUIRED_SIZE=1024;
 
     private File mCacheDir;
 
@@ -55,7 +56,7 @@ public class FileCache {
         }
     }
 
-    private void deleteFile(File file) {
+    private void deleteFile(@NonNull File file) {
         if (file.isDirectory()) {
             for (File f : file.listFiles()) {
                 deleteFile(f);
@@ -75,7 +76,6 @@ public class FileCache {
             }
         }
     }
-
 
     public Bitmap decodeFile(File f){
 

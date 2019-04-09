@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,13 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.prospero.duds.MainActivity;
-import com.prospero.duds.R;
 import com.prospero.duds.ao.Box;
 import com.prospero.duds.view.BoxView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -59,7 +56,7 @@ public class BoxFragment extends BaseFragment {
 
     @SuppressLint("RestrictedApi")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
 
@@ -96,14 +93,13 @@ public class BoxFragment extends BaseFragment {
 
     @Override
     protected ArrayList<View> getViews() {
-        ArrayList<View> views = new ArrayList<View>();
+        ArrayList<View> views = new ArrayList<>();
         if (jsonArray != null) {
             for (int i = 0; i < jsonArray.length(); i++) {
                 try {
-                    JSONObject jobj = jsonArray.getJSONObject(i);
-                    BoxView view = new BoxView(getContext(), this);
+                    BoxView view = new BoxView(this);
                     view.setFilepath(filepath);
-                    view.setImage(new Box(jobj));
+                    view.setImage(new Box(jsonArray.getJSONObject(i)));
                     views.add(view);
                 } catch (JSONException e) {
                     e.printStackTrace();

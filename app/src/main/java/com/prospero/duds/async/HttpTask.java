@@ -3,14 +3,11 @@ package com.prospero.duds.async;
 import android.os.AsyncTask;
 
 import com.prospero.duds.MainActivity;
-import com.prospero.duds.view.SimilarView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -58,7 +55,7 @@ abstract class HttpTask extends AsyncTask<Object, Integer, Integer> {
             try {
                 Integer returnCode = setVariables(objects);
                 if (returnCode == null) {
-                    return returnCode;
+                    return null;
                 }
 
                 URL url = getURL();

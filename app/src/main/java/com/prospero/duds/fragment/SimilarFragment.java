@@ -2,10 +2,9 @@ package com.prospero.duds.fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -14,7 +13,6 @@ import com.prospero.duds.view.SimilarView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -39,7 +37,7 @@ public class SimilarFragment extends BaseFragment {
 
     @SuppressLint("RestrictedApi")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
 
@@ -64,12 +62,11 @@ public class SimilarFragment extends BaseFragment {
 
     @Override
     protected ArrayList<View> getViews() {
-        ArrayList<View> views = new ArrayList<View>();
+        ArrayList<View> views = new ArrayList<>();
         for (int i = 0; i < jsonArray.length(); i++) {
             try {
-                JSONObject jobj = jsonArray.getJSONObject(i);
-                SimilarView view = new SimilarView(getContext(), this);
-                view.setData(jobj);
+                SimilarView view = new SimilarView(this);
+                view.setData(jsonArray.getJSONObject(i));
                 views.add(view);
             } catch (JSONException e) {
                 e.printStackTrace();

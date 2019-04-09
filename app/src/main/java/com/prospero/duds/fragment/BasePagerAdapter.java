@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class BasePagerAdapter extends PagerAdapter {
 
-    private ArrayList<View> views = null;
+    private ArrayList<View> views;
 
     public BasePagerAdapter(@NonNull ArrayList<View> views) {
         super();
@@ -17,7 +17,7 @@ public class BasePagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public int getItemPosition (Object object)
+    public int getItemPosition (@NonNull Object object)
     {
         int index = views.indexOf (object);
         if (index == -1)
@@ -36,15 +36,16 @@ public class BasePagerAdapter extends PagerAdapter {
         return view == o;
     }
 
+    @NonNull
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
         View view = views.get(position);
         container.addView(view);
         return view;
     }
 
     @Override
-    public void destroyItem (ViewGroup container, int position, Object object)
+    public void destroyItem (@NonNull ViewGroup container, int position, @NonNull Object object)
     {
         container.removeView(views.get(position));
     }

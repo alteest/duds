@@ -11,7 +11,7 @@ public class UploadPhotoFragment extends UploadFragment {
     @Override
     protected ArrayList<View> getViews() {
         ArrayList<View> views = new ArrayList<>();
-        views.add(new UploadPhotoView(this.getContext(), this));
+        views.add(new UploadPhotoView(this));
         return views;
     }
 }

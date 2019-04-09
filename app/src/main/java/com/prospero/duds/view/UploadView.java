@@ -1,13 +1,8 @@
 package com.prospero.duds.view;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -18,19 +13,13 @@ import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.prospero.duds.MainActivity;
 import com.prospero.duds.R;
 import com.prospero.duds.async.SearchBoxesTask;
-import com.prospero.duds.async.SearchSimilaritiesTask;
 import com.prospero.duds.fragment.BaseFragment;
-import com.prospero.duds.fragment.BoxFragment;
 import com.prospero.duds.fragment.UploadFragment;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public abstract class UploadView extends BaseView {
 
-    public UploadView(Context context, BaseFragment fragment) {
-        super(context, fragment);
+    public UploadView(BaseFragment fragment) {
+        super(fragment);
     }
 
     @Override

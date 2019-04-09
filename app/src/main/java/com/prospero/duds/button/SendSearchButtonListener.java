@@ -3,7 +3,6 @@ package com.prospero.duds.button;
 import android.view.View;
 
 import com.prospero.duds.MainActivity;
-import com.prospero.duds.async.SearchBoxesRequest;
 import com.prospero.duds.async.SearchBoxesTask;
 import com.prospero.duds.fragment.UploadFragment;
 

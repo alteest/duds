@@ -6,8 +6,6 @@ import com.prospero.duds.view.UploadImageView;
 
 import java.util.ArrayList;
 
-import static android.app.Activity.RESULT_OK;
-
 public class UploadImageFragment extends UploadFragment {
 
 /*    @Override
@@ -26,7 +24,7 @@ public class UploadImageFragment extends UploadFragment {
     @Override
     protected ArrayList<View> getViews() {
         ArrayList<View> views = new ArrayList<>();
-        views.add(new UploadImageView(this.getContext(), this));
+        views.add(new UploadImageView(this));
         return views;
     }
 }

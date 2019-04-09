@@ -1,33 +1,28 @@
 package com.prospero.duds.view;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.design.widget.FloatingActionButton;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.prospero.duds.MainActivity;
 import com.prospero.duds.R;
 import com.prospero.duds.ao.Box;
 import com.prospero.duds.async.SearchSimilaritiesTask;
-import com.prospero.duds.button.DoubleClick;
-import com.prospero.duds.button.DoubleClickListener;
 import com.prospero.duds.fragment.BaseFragment;
-import com.prospero.duds.fragment.BoxFragment;
 
 import java.io.ByteArrayOutputStream;
 
+@SuppressLint("ViewConstructor")
 public class BoxView extends BaseView {
 
     protected FloatingActionButton mActionButton = null;
 
     @SuppressLint("RestrictedApi")
-    public BoxView(Context context, BaseFragment fragment) {
-        super(context, fragment);
+    public BoxView(BaseFragment fragment) {
+        super(fragment);
         mImageButton = (ImageButton) findViewById(R.id.box_image_button);
         /*
         mImageButton.setOnClickListener(new DoubleClick(new DoubleClickListener() {
@@ -74,7 +69,7 @@ public class BoxView extends BaseView {
     public void setImage(Box box) {
         Bitmap boxBitmap = Bitmap.createBitmap(BitmapFactory.decodeFile(mFilepath),
                 box.x1, box.y1, box.x2 - box.x1, box.y2 - box.y1);
-        BitmapDrawable bmd = new BitmapDrawable(boxBitmap);
+        BitmapDrawable bmd = new BitmapDrawable(getResources(), boxBitmap);
         mImageButton.setImageDrawable(bmd);
         //mActionButton.setVisibility(View.VISIBLE);
     }

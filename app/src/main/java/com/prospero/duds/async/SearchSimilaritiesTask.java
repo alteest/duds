@@ -6,20 +6,16 @@ import com.prospero.duds.MainActivity;
 import com.prospero.duds.fragment.BoxFragment;
 import com.prospero.duds.fragment.SimilarFragment;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class SearchSimilaritiesTask extends HttpTask { //AsyncTask<BoxFragment, Integer, Integer> {
 
-    private String filepath = null;
     private String attachmentFileName = null;
     private String attachmentName = null;
     private BoxFragment fragment;
@@ -27,7 +23,7 @@ public class SearchSimilaritiesTask extends HttpTask { //AsyncTask<BoxFragment, 
     @Override
     protected Integer setVariables(Object... objects) {
         fragment = (BoxFragment) objects[0];
-        filepath = fragment.getFilepath();
+        String filepath = fragment.getFilepath();
         if (filepath == null) {
             return null;
         }
@@ -66,7 +62,7 @@ public class SearchSimilaritiesTask extends HttpTask { //AsyncTask<BoxFragment, 
         wr.writeBytes(crlf);
         //I want to send only 8 bit black & white bitmaps
 
-        int maxBufferSize = 1 * 1024 * 1024;
+        int maxBufferSize = 1024 * 1024;
         byte[] buffer = fragment.getBytes();
         int bufferSize = Math.min(buffer.length, maxBufferSize);
 

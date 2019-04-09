@@ -1,29 +1,20 @@
 package com.prospero.duds;
 
 import android.annotation.TargetApi;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
-import android.graphics.Bitmap;
-import android.graphics.Point;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.view.Menu;
-import android.view.MenuItem;
 
-import com.prospero.duds.activity.SettingsActivity;
 import com.prospero.duds.ao.Label;
-import com.prospero.duds.async.GetLabelsTask;
 import com.prospero.duds.cache.FileCache;
 import com.prospero.duds.fragment.BaseFragment;
 import com.prospero.duds.fragment.StartupFragment;
-import com.prospero.duds.fragment.UploadFragment;
 import com.prospero.duds.locale.LocaleHelper;
 
 import java.io.BufferedWriter;
@@ -110,9 +101,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-        String[] permissions, int[] grantResults) {
-        System.out.println("OnRequestPermissions " + permissions.toString() + " ||| " + grantResults.toString());
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        //System.out.println("OnRequestPermissions " + permissions.toString() + " ||| " + grantResults.toString());
         boolean granted = true;
         // If request is cancelled, the result arrays are empty.
         for (int grantResult: grantResults) {

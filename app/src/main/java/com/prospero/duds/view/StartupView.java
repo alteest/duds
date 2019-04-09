@@ -7,18 +7,12 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Environment;
-import android.support.v4.view.MotionEventCompat;
-import android.support.v4.widget.SlidingPaneLayout;
-import android.transition.Slide;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.SlidingDrawer;
 
 import com.prospero.duds.MainActivity;
 import com.prospero.duds.R;
@@ -26,15 +20,12 @@ import com.prospero.duds.activity.SettingsActivity;
 import com.prospero.duds.fragment.UploadImageFragment;
 import com.prospero.duds.fragment.UploadPhotoFragment;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class StartupView extends LinearLayout {
 
-    Drawable drawableButtons = null;
+    Drawable drawableButtons;
 
     @SuppressLint("ClickableViewAccessibility")
     public StartupView(Context context) {
@@ -49,7 +40,7 @@ public class StartupView extends LinearLayout {
         layout.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                int action = MotionEventCompat.getActionMasked(motionEvent);
+                int action = motionEvent.getActionMasked();
                 TranslateAnimation animate = null;
                 switch(action) {
                     case (MotionEvent.ACTION_DOWN):
@@ -227,7 +218,7 @@ public class StartupView extends LinearLayout {
 
     protected int getLayoutResource() {
         return R.layout.startup_view;
-    };
+    }
 
     @SuppressLint("WrongThread")
     protected Drawable getButtonBackground(int x0, int y0, int x1, int y1) {
@@ -246,7 +237,7 @@ public class StartupView extends LinearLayout {
         drawable.draw(canvas);
 
         Bitmap boxBitmap = Bitmap.createBitmap(bitmap, x0, y0, x1 - x0, y1 - y0);
-        BitmapDrawable bmd = new BitmapDrawable(getResources(), boxBitmap);
+        return new BitmapDrawable(getResources(), boxBitmap);
 
         /*
         try {
@@ -262,7 +253,6 @@ public class StartupView extends LinearLayout {
             e.printStackTrace();
         }
         */
-        return bmd;
     }
 
     protected static int getPercentPixels(int size, float percent) {

@@ -1,5 +1,7 @@
 package com.prospero.duds.ao;
 
+import android.support.annotation.NonNull;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,11 +15,11 @@ public final class Box {
     public Integer x2 = null;
     public Integer y2 = null;
 
-    public Box(JSONObject jobj) {
+    public Box(@NonNull JSONObject jsonObj) {
         try {
-            label = jobj.getInt("label");
-            score = jobj.getDouble("score");
-            JSONArray box = jobj.getJSONArray("box");
+            label = jsonObj.getInt("label");
+            score = jsonObj.getDouble("score");
+            JSONArray box = jsonObj.getJSONArray("box");
             x1 = box.getInt(0);
             y1 = box.getInt(1);
             x2 = box.getInt(2);

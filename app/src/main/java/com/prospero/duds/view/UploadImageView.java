@@ -2,20 +2,12 @@ package com.prospero.duds.view;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Canvas;
-import android.graphics.Point;
-import android.graphics.Rect;
 import android.net.Uri;
-import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.github.amlcurran.showcaseview.ShowcaseDrawer;
@@ -23,8 +15,6 @@ import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.prospero.duds.MainActivity;
 import com.prospero.duds.R;
-import com.prospero.duds.button.DoubleClick;
-import com.prospero.duds.button.DoubleClickListener;
 import com.prospero.duds.fragment.BaseFragment;
 
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
@@ -35,8 +25,8 @@ public class UploadImageView extends UploadView {
     private MaterialShowcaseView mShowcaseView;
 
     @SuppressLint("RestrictedApi")
-    public UploadImageView(Context context, BaseFragment fragment) {
-        super(context, fragment);
+    public UploadImageView(BaseFragment fragment) {
+        super(fragment);
 
         mImageButton = (ImageButton) findViewById(R.id.upload_image_button);
 /*        mImageButton.setOnClickListener(new DoubleClick(new DoubleClickListener() {

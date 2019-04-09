@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 
 import com.prospero.duds.MainActivity;
 import com.prospero.duds.cache.FileCache;
-import com.prospero.duds.fragment.SimilarFragment;
 import com.prospero.duds.view.SimilarView;
 
 import java.io.File;
@@ -40,7 +39,7 @@ public class GetSimilarImageTask extends HttpGetTask { //} AsyncTask<SimilarView
 
     protected StringBuffer readResponse(HttpURLConnection con) throws IOException {
         OutputStream os = new FileOutputStream(f);
-        fileCache.CopyStream(con.getInputStream(), os);
+        FileCache.CopyStream(con.getInputStream(), os);
         //bitmap = BitmapFactory.decodeStream(con.getInputStream());
         os.close();
         con.disconnect();
