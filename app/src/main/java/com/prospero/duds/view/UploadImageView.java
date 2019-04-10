@@ -2,6 +2,7 @@ package com.prospero.duds.view;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -81,8 +82,7 @@ public class UploadImageView extends UploadView {
     @Override
     protected void selectImage() {
         MainActivity.activity.validatePermission(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE});
-        Intent intent = new Intent(Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         MainActivity.activity.getCurrentFragment().startActivityForResult(intent, 1);
     }
 

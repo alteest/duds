@@ -124,6 +124,7 @@ public class UploadPhotoView extends UploadView {
     @Override
     protected void selectImage() {
         MainActivity.activity.validatePermission(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE});
+        MainActivity.activity.validatePermission(new String[]{Manifest.permission.CAMERA});
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
         if (intent.resolveActivity(MainActivity.activity.getPackageManager()) != null) {
@@ -136,7 +137,7 @@ public class UploadPhotoView extends UploadView {
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(view.getContext(),
+                Uri photoURI = FileProvider.getUriForFile(this.getContext(),
                         "com.prospero.duds.fileprovider",
                         photoFile);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);

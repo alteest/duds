@@ -21,6 +21,7 @@ import com.prospero.duds.view.UploadView;
 import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_OK;
+import static android.app.Activity.RESULT_CANCELED;
 
 public class UploadFragment extends BaseFragment {
 
@@ -92,10 +93,10 @@ public class UploadFragment extends BaseFragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (data == null) {
             return;
         }
-        super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             UploadView view;
             if (views.size() == 1) {
