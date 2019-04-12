@@ -24,18 +24,19 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 public class UploadPhotoView extends UploadView {
 
-    ShowcaseView view;
+    private ShowcaseView view;
 
     @SuppressLint("RestrictedApi")
     public UploadPhotoView(BaseFragment fragment) {
         super(fragment);
 
-        mImageButton = (ImageButton) findViewById(R.id.upload_photo_button);
+        mImageButton = findViewById(R.id.upload_photo_button);
         /*
         mImageButton.setOnClickListener(new DoubleClick(new DoubleClickListener() {
             @Override
@@ -160,7 +161,7 @@ public class UploadPhotoView extends UploadView {
     private File createImageFile() throws IOException {
         // Create an image file name
         Date date = new Date();
-        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US);
         String timeStamp = fmt.format(date);
         String imageFileName = "JPEG_duds_" + timeStamp + "_";
         File storageDir = MainActivity.activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);

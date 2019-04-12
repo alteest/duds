@@ -21,16 +21,16 @@ public class SimilarView extends BaseView {
 
     private ProgressBar mProgressBar;
 
-    protected String filename = null;
-    protected String url = null;
-    protected String store = null;
-    protected float distance = -1;
+    private String filename = null;
+    private String url = null;
+    private String store = null;
+    private float distance = -1;
 
     @SuppressLint("RestrictedApi")
     public SimilarView(BaseFragment fragment) {
         super(fragment);
-        mImageButton = (ImageButton) findViewById(R.id.similar_image);
-        mProgressBar = (ProgressBar) findViewById(R.id.progress_similar);
+        mImageButton = findViewById(R.id.similar_image);
+        mProgressBar = findViewById(R.id.progress_similar);
         hideProgressBar();
 
         /*mImageButton.setOnClickListener(new OnClickListener() {
@@ -123,7 +123,7 @@ public class SimilarView extends BaseView {
         mImageButton.setImageBitmap(bitmap);
     }
 
-    public void showProgressBar() {
+    private void showProgressBar() {
         mImageButton.setVisibility(View.INVISIBLE);
         mProgressBar.setVisibility(View.VISIBLE);
     }

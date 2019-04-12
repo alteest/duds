@@ -16,7 +16,7 @@ public class FileCache {
 
     private final int REQUIRED_SIZE=1024;
 
-    private File mCacheDir;
+    private final File mCacheDir;
 
     public FileCache(Context context) {
 
@@ -91,9 +91,7 @@ public class FileCache {
             // Set width/height of recreated image
             int width_tmp = options1.outWidth, height_tmp= options1.outHeight;
             int scale = 1;
-            while (true){
-                if(width_tmp/2 < REQUIRED_SIZE || height_tmp/2 < REQUIRED_SIZE)
-                    break;
+            while (width_tmp / 2 >= REQUIRED_SIZE && height_tmp / 2 >= REQUIRED_SIZE) {
                 width_tmp /= 2;
                 height_tmp /= 2;
                 scale *= 2;

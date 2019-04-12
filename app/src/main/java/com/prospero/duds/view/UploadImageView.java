@@ -29,7 +29,7 @@ public class UploadImageView extends UploadView {
     public UploadImageView(BaseFragment fragment) {
         super(fragment);
 
-        mImageButton = (ImageButton) findViewById(R.id.upload_image_button);
+        mImageButton = findViewById(R.id.upload_image_button);
 /*        mImageButton.setOnClickListener(new DoubleClick(new DoubleClickListener() {
             @Override
             public void onSingleClick(View view) {
@@ -101,13 +101,15 @@ public class UploadImageView extends UploadView {
     @Override
     public void onActivityResult(Intent data) {
         Uri selectedImage = data.getData();
-        String[] filePath = { MediaStore.Images.Media.DATA };
-        Cursor c = MainActivity.activity.getContentResolver().query(selectedImage, filePath,
-                null, null, null);
-        c.moveToFirst();
-        int columnIndex = c.getColumnIndex(filePath[0]);
-        String picturePath = c.getString(columnIndex);
-        c.close();
-        setImage(picturePath);
+        if (selectedImage != null) {
+            String[] filePath = {MediaStore.Images.Media.DATA};
+            Cursor c = MainActivity.activity.getContentResolver().query(selectedImage, filePath,
+                    null, null, null);
+            c.moveToFirst();
+            int columnIndex = c.getColumnIndex(filePath[0]);
+            String picturePath = c.getString(columnIndex);
+            c.close();
+            setImage(picturePath);
+        }
     }
 }

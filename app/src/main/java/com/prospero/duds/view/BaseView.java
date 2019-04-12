@@ -15,12 +15,12 @@ import java.util.Map;
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 public abstract class BaseView extends RelativeLayout {
-    protected ImageButton mImageButton;
-    protected String mFilepath = null;
+    ImageButton mImageButton;
+    String mFilepath = null;
     protected Map<String, ShowcaseView> mShowcaseViews = new HashMap<>();
-    protected BaseFragment mFragment;
+    final BaseFragment mFragment;
 
-    public BaseView(@NonNull BaseFragment fragment) {
+    BaseView(@NonNull BaseFragment fragment) {
         super(fragment.getContext());
         mFragment = fragment;
         LayoutInflater mInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);

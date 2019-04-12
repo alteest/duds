@@ -20,9 +20,9 @@ abstract class HttpTask extends AsyncTask<Object, Integer, Integer> {
     static final String boundary = "***********";
     static final String crlf = "\r\n";
 
-    protected JSONArray jsonResponse = null;
+    JSONArray jsonResponse = null;
 
-    protected boolean doRequest(Object... objects) {
+    private boolean doRequest(Object... objects) {
         return objects.length == 1;
     }
 
@@ -31,7 +31,7 @@ abstract class HttpTask extends AsyncTask<Object, Integer, Integer> {
     protected abstract HttpURLConnection getHttpURLConnection(URL url) throws IOException;
     protected abstract void sendRequest(HttpURLConnection con) throws IOException;
 
-    protected StringBuffer readResponse(HttpURLConnection con) throws IOException {
+    StringBuffer readResponse(HttpURLConnection con) throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;
         StringBuffer response = new StringBuffer();
@@ -44,7 +44,7 @@ abstract class HttpTask extends AsyncTask<Object, Integer, Integer> {
         return response;
     }
 
-    protected Integer processResponse(StringBuffer buffer) throws JSONException {
+    Integer processResponse(StringBuffer buffer) throws JSONException {
         jsonResponse = new JSONArray(buffer.toString());
         return jsonResponse.length();
     }

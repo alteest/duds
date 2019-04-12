@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class BasePagerAdapter extends PagerAdapter {
 
-    private ArrayList<View> views;
+    private final ArrayList<View> views;
 
     public BasePagerAdapter(@NonNull ArrayList<View> views) {
         super();
@@ -50,7 +50,7 @@ public class BasePagerAdapter extends PagerAdapter {
         container.removeView(views.get(position));
     }
 
-    public View getView(int position) {
+    View getView(int position) {
         if (position >= views.size()) {
             return null;
         }

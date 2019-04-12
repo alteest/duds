@@ -25,7 +25,7 @@ import java.util.List;
 
 public class StartupView extends LinearLayout {
 
-    Drawable drawableButtons;
+    private final Drawable drawableButtons;
 
     @SuppressLint("ClickableViewAccessibility")
     public StartupView(Context context) {
@@ -35,8 +35,8 @@ public class StartupView extends LinearLayout {
 
         drawableButtons = getResources().getDrawable(R.drawable.startup_buttons);
 
-        final LinearLayout buttonsLayout = (LinearLayout) findViewById(R.id.startup_buttons_linear_layout);
-        final LinearLayout layout = (LinearLayout) findViewById(R.id.startup_linear_layout);
+        final LinearLayout buttonsLayout = findViewById(R.id.startup_buttons_linear_layout);
+        final LinearLayout layout = findViewById(R.id.startup_linear_layout);
         layout.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -85,7 +85,7 @@ public class StartupView extends LinearLayout {
         });
 
 
-        Button buttonPicture = (Button) findViewById(R.id.startup_button_picture);
+        Button buttonPicture = findViewById(R.id.startup_button_picture);
         buttonPicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,7 +93,7 @@ public class StartupView extends LinearLayout {
             }
         });
 
-        Button buttonPhoto = (Button) findViewById(R.id.startup_button_photo);
+        Button buttonPhoto = findViewById(R.id.startup_button_photo);
         buttonPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,7 +101,7 @@ public class StartupView extends LinearLayout {
             }
         });
 
-        Button buttonSettings = (Button) findViewById(R.id.startup_button_settings);
+        Button buttonSettings = findViewById(R.id.startup_button_settings);
         buttonSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,7 +165,7 @@ public class StartupView extends LinearLayout {
     }
 */
 
-    protected void changeButtons() {
+    private void changeButtons() {
         int w = getWidth();
         int h = getHeight();
         //int w = drawable.getIntrinsicWidth();
@@ -182,7 +182,7 @@ public class StartupView extends LinearLayout {
         buttons.add(R.id.startup_button_picture);
         Button button;
         for (Integer res: buttons) {
-            button = (Button) findViewById(res);
+            button = findViewById(res);
             if (button.getVisibility() == VISIBLE) {
                 changeButton(button, buttonHeight, border, w, h, pos);
                 pos += 1;
@@ -207,7 +207,7 @@ public class StartupView extends LinearLayout {
         */
     }
 
-    protected void changeButton(Button button, int buttonHeight, int margin, int width, int height, int pos) {
+    private void changeButton(Button button, int buttonHeight, int margin, int width, int height, int pos) {
         button.setTransformationMethod(null);
         button.setHeight(buttonHeight);
         LayoutParams params = (LayoutParams) button.getLayoutParams();
@@ -216,12 +216,12 @@ public class StartupView extends LinearLayout {
                 width - margin, height - margin - pos * (buttonHeight + margin)));
     }
 
-    protected int getLayoutResource() {
+    private int getLayoutResource() {
         return R.layout.startup_view;
     }
 
     @SuppressLint("WrongThread")
-    protected Drawable getButtonBackground(int x0, int y0, int x1, int y1) {
+    private Drawable getButtonBackground(int x0, int y0, int x1, int y1) {
 
         int w = getWidth();
         int h = getHeight();
@@ -255,7 +255,7 @@ public class StartupView extends LinearLayout {
         */
     }
 
-    protected static int getPercentPixels(int size, float percent) {
+    private static int getPercentPixels(int size, float percent) {
         return Math.round(size * percent / 100);
     }
 

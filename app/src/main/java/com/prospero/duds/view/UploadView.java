@@ -60,7 +60,7 @@ public abstract class UploadView extends BaseView {
     public abstract void onActivityResult(Intent data);
 
     @SuppressLint("RestrictedApi")
-    public void setImage(String filepath) {
+    void setImage(String filepath) {
 
         ViewGroup.LayoutParams params = mImageButton.getLayoutParams();
         params.width = ViewGroup.LayoutParams.MATCH_PARENT;
@@ -83,7 +83,7 @@ public abstract class UploadView extends BaseView {
         //mShowcaseViews.get("mImageButtonSelect").show();
     }
 
-    protected void doSearch() {
+    private void doSearch() {
 
         /*final Dialog dialog = new Dialog(MainActivity.activity);
         dialog.setContentView(R.layout.dialog_upload);

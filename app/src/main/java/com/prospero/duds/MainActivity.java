@@ -21,6 +21,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     @TargetApi(23)
     public boolean validatePermission(String[] permissions) {
-        System.out.println("Validate permissions for " + permissions.toString());
+        System.out.println("Validate permissions for " + Arrays.toString(permissions));
         for (String permission: permissions) {
             System.out.println("Permissions : " + permission);
             if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             //setFragment(new UploadFragment());
             setFragment(new StartupFragment());
         }
-        mNavigation = (BottomNavigationView) findViewById(R.id.navigation);
+        mNavigation = findViewById(R.id.navigation);
 
         //new GetLabelsTask().execute(this);
     }

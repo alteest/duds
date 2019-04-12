@@ -21,11 +21,11 @@ import java.util.ArrayList;
 
 public abstract class BaseFragment extends Fragment {
 
-    protected ViewPager mViewPager;
-    protected BasePagerAdapter mBasePagerAdapter;
-    protected TabLayout mDotsTabLayout;
+    ViewPager mViewPager;
+    BasePagerAdapter mBasePagerAdapter;
+    TabLayout mDotsTabLayout;
 
-    protected ArrayList<View> views = null;
+    ArrayList<View> views = null;
 
     private ImageButton leftNav;
     private ImageButton rightNav;
@@ -53,7 +53,7 @@ public abstract class BaseFragment extends Fragment {
 
         mBasePagerAdapter = new BasePagerAdapter(views);
 
-        mViewPager = (ViewPager) rootView.findViewById(R.id.pager);
+        mViewPager = rootView.findViewById(R.id.pager);
         mViewPager.setAdapter(mBasePagerAdapter);
 
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -64,7 +64,7 @@ public abstract class BaseFragment extends Fragment {
                 toggleNavigationVisibility(position);
             }
         });
-        mDotsTabLayout = (TabLayout) rootView.findViewById(R.id.dots_tab_layout);
+        mDotsTabLayout = rootView.findViewById(R.id.dots_tab_layout);
         mDotsTabLayout.setupWithViewPager(mViewPager, true);
         if (views.size() > 4) {
             mDotsTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
@@ -74,8 +74,8 @@ public abstract class BaseFragment extends Fragment {
             mDotsTabLayout.setTabMode(TabLayout.MODE_FIXED);
         }
 
-        leftNav = (ImageButton) rootView.findViewById(R.id.left_nav);
-        rightNav = (ImageButton) rootView.findViewById(R.id.right_nav);
+        leftNav = rootView.findViewById(R.id.left_nav);
+        rightNav = rootView.findViewById(R.id.right_nav);
 
         leftNav.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +91,7 @@ public abstract class BaseFragment extends Fragment {
             }
         });
 
-        progressBarLoad = (ProgressBar) rootView.findViewById(R.id.progress_load);
+        progressBarLoad = rootView.findViewById(R.id.progress_load);
         hideProgressBar();
 
         BottomNavigationView navigation = MainActivity.activity.getNavigation();
@@ -103,7 +103,7 @@ public abstract class BaseFragment extends Fragment {
             navigation.setVisibility(View.VISIBLE);
         }
 
-        mFloatingActionButton = (FloatingActionButton) rootView.findViewById(R.id.search_button);
+        mFloatingActionButton = rootView.findViewById(R.id.search_button);
         mFloatingActionButton.bringToFront();
 
         toggleNavigationVisibility(mViewPager.getCurrentItem());
