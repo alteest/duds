@@ -51,7 +51,6 @@
         android:layout_gravity="bottom|center"
         android:foregroundGravity="center"
         android:gravity="center"
-        android:visibility="gone"
         android:textColor="@android:color/white"
         android:text="@string/startup_button_share" />
 

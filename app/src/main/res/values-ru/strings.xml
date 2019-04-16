@@ -20,9 +20,11 @@
     <string name="startup_button_photo">Сделать фото</string>
     <string name="startup_button_picture">Загрузить картинку</string>
 
+    <string name="share_application_header">Выберите</string>
+    <string name="share_application_text">Хочу порекомендовать следующее приложение</string>
+
     <string name="dialog_upload_search_similar">Искать похожие</string>
     <string name="dialog_upload_search_box">Искать объекты</string>
-
 
     <string name="helper_upload_image_button_text">Здесь вы можете загрузить картинку. Нажмите раз.</string>
     <string name="helper_upload_image_button_send_text">Нажмите джажды чтобы искать одежду.</string>
