@@ -20,6 +20,8 @@
     <string name="startup_button_photo">Make photo</string>
     <string name="startup_button_picture">Upload picture</string>
 
+    <string name="not_found">Not Found</string>
+
     <string name="share_application_header">Choose one</string>
     <string name="share_application_text">Let me recommend you this application</string>
 

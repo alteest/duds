@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.prospero.duds.MainActivity;
 import com.prospero.duds.ao.Box;
 import com.prospero.duds.view.BoxView;
+import com.prospero.duds.view.NotFoundView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -105,6 +106,9 @@ public class BoxFragment extends BaseFragment {
                     e.printStackTrace();
                 }
             }
+        }
+        if (views.isEmpty()) {
+            views.add(new NotFoundView(this));
         }
         return views;
     }

@@ -23,6 +23,8 @@
     <string name="share_application_header">Выберите</string>
     <string name="share_application_text">Хочу порекомендовать следующее приложение</string>
 
+    <string name="not_found">Не найдено</string>
+
     <string name="dialog_upload_search_similar">Искать похожие</string>
     <string name="dialog_upload_search_box">Искать объекты</string>
 
