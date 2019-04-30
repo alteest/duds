@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import com.prospero.duds.MainActivity;
 import com.prospero.duds.R;
 import com.prospero.duds.activity.SettingsActivity;
+import com.prospero.duds.fragment.AboutFragment;
 import com.prospero.duds.fragment.UploadImageFragment;
 import com.prospero.duds.fragment.UploadPhotoFragment;
 
@@ -126,8 +127,13 @@ public class StartupView extends LinearLayout {
                 }               }
         });
 
-
-
+        Button buttonAbout = findViewById(R.id.startup_button_about);
+        buttonAbout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.activity.setFragment(new AboutFragment());
+            }
+        });
 
     }
 

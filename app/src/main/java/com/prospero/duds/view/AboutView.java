@@ -5,10 +5,10 @@ import android.annotation.SuppressLint;
 import com.prospero.duds.R;
 import com.prospero.duds.fragment.BaseFragment;
 
-public class NotFoundView extends BaseView {
+public class AboutView extends BaseView {
 
-    @SuppressLint("RestrictedApi")
-    public NotFoundView(BaseFragment fragment) {
+    //@SuppressLint("RestrictedApi")
+    public AboutView(BaseFragment fragment) {
         super(fragment);
     }
 
@@ -26,6 +26,6 @@ public class NotFoundView extends BaseView {
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.not_found_view;
+        return R.layout.about_view;
     }
 }

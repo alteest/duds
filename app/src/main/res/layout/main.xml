@@ -36,12 +36,13 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <!-- android:paddingBottom="58dp" -->
+    <!-- android:paddingBottom="58dp"
+         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+-->
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="wrap_content">
     </FrameLayout>
 
 </android.support.design.widget.CoordinatorLayout>
