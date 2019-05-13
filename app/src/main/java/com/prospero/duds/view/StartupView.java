@@ -12,12 +12,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.prospero.duds.MainActivity;
 import com.prospero.duds.R;
 import com.prospero.duds.activity.SettingsActivity;
 import com.prospero.duds.fragment.AboutFragment;
+import com.prospero.duds.fragment.FeedbackFragment;
 import com.prospero.duds.fragment.UploadImageFragment;
 import com.prospero.duds.fragment.UploadPhotoFragment;
 
@@ -99,6 +101,14 @@ public class StartupView extends LinearLayout {
             @Override
             public void onClick(View v) {
                 MainActivity.activity.setFragment(new UploadPhotoFragment());
+            }
+        });
+
+        Button buttonFeedback = findViewById(R.id.startup_button_feedback);
+        buttonFeedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.activity.setFragment(new FeedbackFragment());
             }
         });
 
@@ -203,6 +213,7 @@ public class StartupView extends LinearLayout {
         List<Integer> buttons = new ArrayList<>();
         buttons.add(R.id.startup_button_about);
         buttons.add(R.id.startup_button_share);
+        buttons.add(R.id.startup_button_feedback);
         buttons.add(R.id.startup_button_settings);
         buttons.add(R.id.startup_button_photo);
         buttons.add(R.id.startup_button_picture);
@@ -214,6 +225,12 @@ public class StartupView extends LinearLayout {
                 pos += 1;
             }
         }
+
+        ImageView startupHeaderImage = findViewById(R.id.startup_header_image);
+        LayoutParams params = (LayoutParams) startupHeaderImage.getLayoutParams();
+        params.setMargins(border, border, border, border);
+        startupHeaderImage.setImageDrawable(getButtonBackground(border, border, w - border,
+                h - border - pos * (buttonHeight + border)));
 
         /*
         Button buttonAbout = (Button) findViewById(R.id.startup_button_about);

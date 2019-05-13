@@ -19,12 +19,15 @@
     <string name="startup_button_settings">Настройки</string>
     <string name="startup_button_photo">Сделать фото</string>
     <string name="startup_button_picture">Загрузить картинку</string>
+    <string name="startup_button_feedback">Написать отзыв</string>
 
     <string name="share_application_header">Выберите</string>
     <string name="share_application_text">Хочу порекомендовать следующее приложение</string>
 
     <string name="not_found">Не найдено</string>
     <string name="about_text">Приложение DUDS находит похожую одежду (по фотографиям) в онлайн магазинах</string>
+    <string name="feedback_title_text">Напишите отзыв</string>
+    <string name="feedback_send">Отправить</string>
 
     <string name="dialog_upload_search_similar">Искать похожие</string>
     <string name="dialog_upload_search_box">Искать объекты</string>
