@@ -230,7 +230,7 @@ public class StartupView extends LinearLayout {
         LayoutParams params = (LayoutParams) startupHeaderImage.getLayoutParams();
         params.setMargins(border, border, border, border);
         startupHeaderImage.setImageDrawable(getButtonBackground(border, border, w - border,
-                h - border - pos * (buttonHeight + border)));
+                h - border - pos * border - pos * (buttonHeight + border)));
 
         /*
         Button buttonAbout = (Button) findViewById(R.id.startup_button_about);
