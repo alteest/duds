@@ -27,10 +27,7 @@ public abstract class BaseView extends RelativeLayout {
         mInflater.inflate(getLayoutResource(), this);
     }
 
-    public void showShowcaseViews() {}
-
     protected abstract int getLayoutResource();
-    public void updateView() {}
 
     public void setFilepath(String filepath) {
         mFilepath = filepath;
@@ -39,5 +36,4 @@ public abstract class BaseView extends RelativeLayout {
     public String getFilepath() {
         return mFilepath;
     }
-    public void doFloatingActionButton() {}
 }

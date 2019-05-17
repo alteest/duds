@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -30,21 +31,6 @@ public class UploadImageView extends UploadView {
         super(fragment);
 
         mImageButton = findViewById(R.id.upload_image_button);
-/*        mImageButton.setOnClickListener(new DoubleClick(new DoubleClickListener() {
-            @Override
-            public void onSingleClick(View view) {
-                MainActivity.activity.validatePermission(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE});
-                Intent intent = new Intent(Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                MainActivity.activity.getCurrentFragment().startActivityForResult(intent, 1);
-            }
-
-            @Override
-            public void onDoubleClick(View view) {
-                doSearch();
-            }
-        }));
-*/
         mImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,47 +39,18 @@ public class UploadImageView extends UploadView {
         });
     }
 
-    public void showShowcaseViews2() {
-        new MaterialShowcaseView.Builder(MainActivity.activity)
-                .setTarget(mImageButton)
-                .setTargetTouchable(true)
-                .setContentText(R.string.helper_upload_image_button_text)
-                .setContentTextColor(R.color.showcase_text_color)
-                .setMaskColour(ContextCompat.getColor(MainActivity.activity, R.color.showcase_background_color))
-                .setDelay(100)
-                .setDismissOnTargetTouch(true)
-                .setDismissOnTouch(true)
-                .show();
-    }
-
-        /* TODO use MaterialShowcaseView
-        Get an error : java.lang.IllegalStateException: Cannot start this animator on a detached view!
-
-        mShowcaseViews.put("mImageButton", new ShowcaseView.Builder(MainActivity.activity)
-                .setTarget(new ViewTarget(mImageButton))
-                .setContentText(R.string.helper_upload_image_button_text)
-                .replaceEndButton(button)
-                .setStyle(R.style.MyCustomShowcaseTheme)
-                //.setContentTextPaint(paint)
-                .hideOnTouchOutside()
-                .build());*/
-
-
     @Override
     protected void selectImage() {
-        MainActivity.activity.validatePermission(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE});
+        for (String permission: new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}) {
+            if (ContextCompat.checkSelfPermission(getContext(), permission) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
+        }
         Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         MainActivity.activity.getCurrentFragment().startActivityForResult(intent, 1);
     }
 
     @Override
-    public void setImage(String filepath) {
-        super.setImage(filepath);
-        //mShowcaseViewBuilder.useFadeAnimation();
-        //mShowcaseView.setEnabled(false);
-        //mShowcaseView.setVisibility(View.GONE);
-    }
-        @Override
     protected int getLayoutResource() {
         return R.layout.upload_image_view;
     }

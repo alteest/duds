@@ -1,7 +1,10 @@
 package com.prospero.duds;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.pm.PackageManager;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 
@@ -21,9 +24,13 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,21 +46,10 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView mNavigation = null;
     private Map<Integer, Label> labels = new HashMap<>();
+    //private ArrayList<String> deniedPermissions = new ArrayList<>();
 
-    private int mode;
-
-    @TargetApi(23)
-    public boolean validatePermission(String[] permissions) {
-        System.out.println("Validate permissions for " + Arrays.toString(permissions));
-        for (String permission: permissions) {
-            System.out.println("Permissions : " + permission);
-            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(permissions, 1);
-                break;
-            }
-        }
-        return true;
-    }
+    //final Lock lock = new ReentrantLock();
+    //final Condition waitPermissions = lock.newCondition();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +88,13 @@ public class MainActivity extends AppCompatActivity {
         mNavigation = findViewById(R.id.navigation);
 
         //new GetLabelsTask().execute(this);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(new String[]{
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.CAMERA}, 1);
+        }
     }
 
     @Override
@@ -101,25 +104,55 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        //System.out.println("OnRequestPermissions " + permissions.toString() + " ||| " + grantResults.toString());
-        boolean granted = true;
-        // If request is cancelled, the result arrays are empty.
-        for (int grantResult: grantResults) {
-            if (grantResult == PackageManager.PERMISSION_DENIED) {
-                System.out.println("Denied!!!");
-                granted = false;
-                break;
+/*    @TargetApi(23)
+    public boolean validatePermission(String[] permissions) {
+        System.out.println("Validate permissions for " + Arrays.toString(permissions));
+        ArrayList<String> nonGrantedPermissions = new ArrayList<>();
+        for (String permission: permissions) {
+            System.out.println("Permissions : " + permission);
+            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                nonGrantedPermissions.add(permission);
             }
         }
-        if (!granted) {
-            // permission denied, boo! Disable the
-            // functionality that depends on this permission.
-            //Toast.makeText(MainActivity.this, "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
-            System.out.println("DENIED!!!!");
+        if (!nonGrantedPermissions.isEmpty()) {
+            lock.lock();
+            try {
+                String[] newArray = new String[nonGrantedPermissions.size()];
+                for(int i=0; i<nonGrantedPermissions.size(); i++)
+                {
+                    newArray[i] = nonGrantedPermissions.get(i);
+                }
+                ActivityCompat.requestPermissions(this, newArray, 1);
+                        //requestPermissions(newArray, 1);
+                waitPermissions.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                lock.unlock();
+            }
+            for (String permission: nonGrantedPermissions) {
+                if (deniedPermissions.contains(permission)) {
+                    return false;
+                }
+            }
         }
-    }
+        return true;
+    }*/
+
+/*    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        System.out.println("OnRequestPermissions " + permissions.toString() + " ||| " + grantResults.toString());
+        for(int i = 0; i < permissions.length; i++){
+            String permission = permissions[i];
+            if (deniedPermissions.contains(permission)) {
+                deniedPermissions.remove(permission);
+            }
+            if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
+                deniedPermissions.add(permission);
+            }
+        }
+        //waitPermissions.signal();
+    }*/
 
     @Override
     public void onBackPressed(){

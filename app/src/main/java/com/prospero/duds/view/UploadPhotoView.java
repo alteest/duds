@@ -3,10 +3,12 @@ package com.prospero.duds.view;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.View;
@@ -37,95 +39,23 @@ public class UploadPhotoView extends UploadView {
         super(fragment);
 
         mImageButton = findViewById(R.id.upload_photo_button);
-        /*
-        mImageButton.setOnClickListener(new DoubleClick(new DoubleClickListener() {
-            @Override
-            public void onSingleClick(View view) {
-                MainActivity.activity.validatePermission(new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE});
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                // Ensure that there's a camera activity to handle the intent
-                if (intent.resolveActivity(MainActivity.activity.getPackageManager()) != null) {
-                    // Create the File where the photo should go
-                    File photoFile = null;
-                    try {
-                        photoFile = createImageFile();
-                    } catch (IOException ex) {
-                        // Error occurred while creating the File
-                    }
-                    // Continue only if the File was successfully created
-                    if (photoFile != null) {
-                        Uri photoURI = FileProvider.getUriForFile(view.getContext(),
-                                "com.prospero.duds.fileprovider",
-                                photoFile);
-                        intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                        MainActivity.activity.getCurrentFragment().startActivityForResult(intent, 1);
-                    }
-                }
-            }
-
-            @Override
-            public void onDoubleClick(View view) {
-                doSearch();
-            }
-        }));
-        */
-
         mImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 selectImage();
             }
         });
-
-        /*mImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MainActivity.activity.validatePermission(new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE});
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                // Ensure that there's a camera activity to handle the intent
-                if (intent.resolveActivity(MainActivity.activity.getPackageManager()) != null) {
-                    // Create the File where the photo should go
-                    File photoFile = null;
-                    try {
-                        photoFile = createImageFile();
-                    } catch (IOException ex) {
-                        // Error occurred while creating the File
-                    }
-                    // Continue only if the File was successfully created
-                    if (photoFile != null) {
-                        Uri photoURI = FileProvider.getUriForFile(view.getContext(),
-                                "com.prospero.duds.fileprovider",
-                                photoFile);
-                        intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                        MainActivity.activity.getCurrentFragment().startActivityForResult(intent, 1);
-                    }
-                }
-            }
-        });*/
-
-    }
-
-    public void showShowcaseViews2() {
-        //view.setTarget(new ViewTarget(mImageButton));
-        //view.show();
-        Button button = new Button(getContext());
-        button.setText("");
-        button.setEnabled(false);
-        button.setVisibility(View.GONE);
-
-        view = new ShowcaseView.Builder(MainActivity.activity)
-                .setTarget(new ViewTarget(mImageButton))
-                .setContentText(R.string.helper_upload_image_button_text)
-                .replaceEndButton(button)
-                .setStyle(R.style.MyCustomShowcaseTheme)
-                .hideOnTouchOutside()
-                .build();
     }
 
     @Override
     protected void selectImage() {
-        MainActivity.activity.validatePermission(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE});
-        MainActivity.activity.validatePermission(new String[]{Manifest.permission.CAMERA});
+        for (String permission: new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}) {
+            if (ContextCompat.checkSelfPermission(getContext(), permission) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
+        }
+        //MainActivity.activity.validatePermission(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE});
+        //MainActivity.activity.validatePermission(new String[]{Manifest.permission.CAMERA});
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
         if (intent.resolveActivity(MainActivity.activity.getPackageManager()) != null) {
@@ -147,7 +77,7 @@ public class UploadPhotoView extends UploadView {
         }
     }
 
-        @Override
+    @Override
     protected int getLayoutResource() {
         return R.layout.upload_photo_view;
     }

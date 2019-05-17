@@ -1,12 +1,15 @@
 package com.prospero.duds.view;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -92,6 +95,11 @@ public class StartupView extends LinearLayout {
         buttonPicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                for (String permission: new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}) {
+                    if (ContextCompat.checkSelfPermission(getContext(), permission) != PackageManager.PERMISSION_GRANTED) {
+                        return;
+                    }
+                }
                 MainActivity.activity.setFragment(new UploadImageFragment());
             }
         });
@@ -100,6 +108,11 @@ public class StartupView extends LinearLayout {
         buttonPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                for (String permission: new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}) {
+                    if (ContextCompat.checkSelfPermission(getContext(), permission) != PackageManager.PERMISSION_GRANTED) {
+                        return;
+                    }
+                }
                 MainActivity.activity.setFragment(new UploadPhotoFragment());
             }
         });
@@ -158,48 +171,6 @@ public class StartupView extends LinearLayout {
         }
         super.onLayout(changed, left, top, right, bottom);
     }
-
-/*    @Override
-    protected void onSizeChanged (int w,
-                                  int h,
-                                  int oldw,
-                                  int oldh) {
-        int w1 = getWidth();
-        super.onSizeChanged(w, h, oldw, oldh);
-    }
-*/
-
-/*
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if(false) {
-            LinearLayout layout = (LinearLayout) findViewById(R.id.startup_linear_layout);
-
-            int w = getWidth();
-            int h = getHeight();
-            //int w = drawable.getIntrinsicWidth();
-            //int h = drawable.getIntrinsicHeight();
-            int h1 = getPercentPixels(h, 1);
-            int h11 = getPercentPixels(h, 11);
-
-            Button buttonAbout = (Button) findViewById(R.id.startup_button_about);
-            changeButton(buttonAbout, h11, h1, w, h, 0);
-
-            Button buttonShare = (Button) findViewById(R.id.startup_button_share);
-            changeButton(buttonShare, h11, h1, w, h, 1);
-
-            Button buttonSettings = (Button) findViewById(R.id.startup_button_settings);
-            changeButton(buttonSettings, h11, h1, w, h, 2);
-
-            Button buttonPhoto = (Button) findViewById(R.id.startup_button_photo);
-            changeButton(buttonPhoto, h11, h1, w, h, 3);
-
-            Button buttonPicture = (Button) findViewById(R.id.startup_button_picture);
-            changeButton(buttonPicture, h11, h1, w, h, 4);
-        }
-    }
-*/
 
     private void changeButtons() {
         int w = getWidth();
