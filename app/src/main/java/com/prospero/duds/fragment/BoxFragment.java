@@ -41,20 +41,6 @@ public class BoxFragment extends BaseFragment {
         filepath = bundle.getString("filepath");
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            int position = item.getItemId() - Menu.FIRST;
-            if (position < views.size()) {
-                mViewPager.setCurrentItem(position);
-                return true;
-            }
-            return false;
-        }
-    };
-
     @SuppressLint("RestrictedApi")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,

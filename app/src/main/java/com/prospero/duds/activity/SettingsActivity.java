@@ -23,7 +23,6 @@ import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 public final class SettingsActivity extends PreferenceActivity {
 
     private AppCompatDelegate mDelegate;
-    private boolean mNeedRecreate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +31,6 @@ public final class SettingsActivity extends PreferenceActivity {
         super.onCreate(savedInstanceState);
         getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mNeedRecreate = false;
         // load settings fragment
         getFragmentManager().beginTransaction().replace(android.R.id.content, new MainPreferenceFragment()).commit();
 
@@ -79,7 +77,6 @@ public final class SettingsActivity extends PreferenceActivity {
                     if (!listPreference.getValue().equals(newValue)) {
                         LocaleHelper.setLocale(MainActivity.activity, stringValue);
                         MainActivity.activity.recreate();
-                        ((SettingsActivity) preference.getContext()).mNeedRecreate = true;
                     }
                 }
             } else {

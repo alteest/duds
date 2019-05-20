@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.net.Uri;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
 import com.prospero.duds.MainActivity;
@@ -24,7 +23,7 @@ public class SimilarView extends BaseView {
     private String filename = null;
     private String url = null;
     private String store = null;
-    private float distance = -1;
+    private float distance;
 
     @SuppressLint("RestrictedApi")
     public SimilarView(BaseFragment fragment) {

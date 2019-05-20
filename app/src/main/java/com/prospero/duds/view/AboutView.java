@@ -1,6 +1,5 @@
 package com.prospero.duds.view;
 
-import android.annotation.SuppressLint;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -9,7 +8,6 @@ import com.prospero.duds.fragment.BaseFragment;
 
 public class AboutView extends BaseView {
 
-    //@SuppressLint("RestrictedApi")
     public AboutView(BaseFragment fragment) {
         super(fragment);
     }

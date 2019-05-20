@@ -18,12 +18,10 @@ import java.io.ByteArrayOutputStream;
 @SuppressLint("ViewConstructor")
 public class BoxView extends BaseView {
 
-    protected FloatingActionButton mActionButton = null;
-
     @SuppressLint("RestrictedApi")
     public BoxView(BaseFragment fragment) {
         super(fragment);
-        mImageButton = (ImageButton) findViewById(R.id.box_image_button);
+        mImageButton = findViewById(R.id.box_image_button);
         /*
         mImageButton.setOnClickListener(new DoubleClick(new DoubleClickListener() {
             @Override

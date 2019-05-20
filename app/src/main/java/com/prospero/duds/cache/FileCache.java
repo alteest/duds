@@ -63,7 +63,7 @@ public class FileCache {
             }
         } else if (file.isFile()) {
             boolean result = file.delete();
-            System.out.println("Delete file result : " + Boolean.toString(result));
+            System.out.println("Delete file result : " + result);
         }
     }
 

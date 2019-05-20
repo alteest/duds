@@ -8,6 +8,13 @@
 
     <!-- android:layout_gravity="center_vertical" -->
 
+    <ImageView
+        android:id="@+id/feedback_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        app:srcCompat="@drawable/feedback_top" />
+
     <TextView
         android:id="@+id/feedback_title_text"
         android:layout_width="wrap_content"
@@ -27,7 +34,7 @@
     </EditText>
 
     <Button
-        android:id="@+id/feeback_send_button"
+        android:id="@+id/feedback_send_button"
         android:layout_height="wrap_content"
         android:text="@string/feedback_send"
         android:layout_width="match_parent">

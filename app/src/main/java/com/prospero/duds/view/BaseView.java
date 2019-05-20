@@ -12,12 +12,9 @@ import com.prospero.duds.fragment.BaseFragment;
 import java.util.HashMap;
 import java.util.Map;
 
-import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
-
 public abstract class BaseView extends RelativeLayout {
     ImageButton mImageButton;
     String mFilepath = null;
-    protected Map<String, ShowcaseView> mShowcaseViews = new HashMap<>();
     final BaseFragment mFragment;
 
     BaseView(@NonNull BaseFragment fragment) {

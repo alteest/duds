@@ -5,20 +5,16 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 
-import com.github.amlcurran.showcaseview.ShowcaseView;
-import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.prospero.duds.MainActivity;
-import com.prospero.duds.R;
 import com.prospero.duds.async.SearchBoxesTask;
 import com.prospero.duds.fragment.BaseFragment;
 import com.prospero.duds.fragment.UploadFragment;
 
 public abstract class UploadView extends BaseView {
 
-    public UploadView(BaseFragment fragment) {
+    UploadView(BaseFragment fragment) {
         super(fragment);
     }
 

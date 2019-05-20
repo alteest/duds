@@ -12,11 +12,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
-
-import com.github.amlcurran.showcaseview.ShowcaseView;
-import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
 import com.prospero.duds.MainActivity;
 import com.prospero.duds.R;
@@ -28,11 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
-
 public class UploadPhotoView extends UploadView {
-
-    private ShowcaseView view;
 
     @SuppressLint("RestrictedApi")
     public UploadPhotoView(BaseFragment fragment) {

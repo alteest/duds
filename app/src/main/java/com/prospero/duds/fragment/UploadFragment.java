@@ -21,7 +21,6 @@ import com.prospero.duds.view.UploadView;
 import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_OK;
-import static android.app.Activity.RESULT_CANCELED;
 
 public class UploadFragment extends BaseFragment {
 
@@ -63,10 +62,6 @@ public class UploadFragment extends BaseFragment {
 
             mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                 public void onPageScrollStateChanged(int state) {
-                    if (state == ViewPager.SCROLL_STATE_IDLE) {
-                        BaseView view = (BaseView) views.get(mViewPager.getCurrentItem());
-                        //view.showShowcaseViews();
-                    }
                 }
 
                 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -83,9 +78,6 @@ public class UploadFragment extends BaseFragment {
                     }
                 }
             });
-            //((BaseView) views.get(mViewPager.getCurrentItem())).showShowcaseViews();
-
-            //mBasePagerAdapter.notifyDataSetChanged();
         }
         mFloatingActionButton.setVisibility(View.VISIBLE);
         return rootView;

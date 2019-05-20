@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-public class BasePagerAdapter extends PagerAdapter {
+class BasePagerAdapter extends PagerAdapter {
 
     private final ArrayList<View> views;
 

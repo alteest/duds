@@ -22,9 +22,10 @@
     <string name="startup_button_feedback">Send feedback</string>
 
     <string name="not_found">Not Found</string>
-    <string name="about_text">Application DUDS allow you to find simlar clothes in online shops</string>
+    <string name="about_text">Application DUDS allow you to find similar clothes in online shops</string>
     <string name="feedback_title_text">Enter feedback</string>
     <string name="feedback_send">Send</string>
+    <string name="feedback_send_success">Success</string>
 
     <string name="share_application_header">Choose one</string>
     <string name="share_application_text">Let me recommend you this application</string>
