@@ -142,7 +142,7 @@ public class StartupView extends LinearLayout {
                     shareIntent.setType("text/plain");
                     shareIntent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.app_name));
                     String shareMessage = getResources().getString(R.string.share_application_text) + "\n\n";
-                    shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + "TODO" +"\n\n";
+                    shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=com.propsero.duds\n\n";
                     shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
                     MainActivity.activity.startActivity(Intent.createChooser(shareIntent, getResources().getString(R.string.share_application_header)));
                 } catch(Exception e) {
