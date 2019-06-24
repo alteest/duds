@@ -69,6 +69,15 @@ public class SearchSimilaritiesTask extends HttpTask { //AsyncTask<BoxFragment, 
         wr.write(buffer, 0, bufferSize);
 
         wr.writeBytes(crlf);
+
+        // Upload test value
+        /*wr.writeBytes(twoHyphens + boundary + crlf);
+        wr.writeBytes("Content-Disposition: form-data; name=\"test\"" + crlf);
+        wr.writeBytes("Content-Type: text/plain" + crlf);
+        wr.writeBytes(crlf);
+        wr.writeBytes(Boolean.toString(true));
+        wr.writeBytes(crlf);*/
+
         wr.writeBytes(twoHyphens + boundary + twoHyphens + crlf);
 
         wr.flush();
