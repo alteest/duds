@@ -27,6 +27,12 @@ public abstract class UploadView extends BaseView {
         if (getFilepath() == null) {
             selectImage();
         }
+        mFragment.mFloatingActionButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                doSearch();
+            }
+        });
         super.onLayout(changed, left, top, right, bottom);
     }
 
@@ -46,12 +52,6 @@ public abstract class UploadView extends BaseView {
         mImageButton.setImageBitmap((BitmapFactory.decodeFile(filepath)));
 
         mFragment.showActionButton();
-        mFragment.mFloatingActionButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                doSearch();
-            }
-        });
     }
 
     private void doSearch() {

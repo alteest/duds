@@ -111,6 +111,12 @@ public abstract class BaseFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        mFloatingActionButton.bringToFront();
+    }
+
     protected abstract ArrayList<View> getViews();
 
     private void toggleNavigationVisibility(int position) {

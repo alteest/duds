@@ -46,15 +46,15 @@ public class BoxView extends BaseView {
                              int bottom) {
         if (changed) {
             mFragment.showActionButton();
-            mFragment.mFloatingActionButton.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //BoxFragment fragment = (BoxFragment) MainActivity.activity.getCurrentFragment();
-                    mFragment.showProgressBar();
-                    new SearchSimilaritiesTask().execute(mFragment);
-                }
-            });
         }
+        mFragment.mFloatingActionButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //BoxFragment fragment = (BoxFragment) MainActivity.activity.getCurrentFragment();
+                mFragment.showProgressBar();
+                new SearchSimilaritiesTask().execute(mFragment);
+            }
+        });
         super.onLayout(changed, left, top, right, bottom);
     }
 

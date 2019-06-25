@@ -70,14 +70,14 @@ public class SimilarView extends BaseView {
                              int bottom) {
         if (changed) {
             mFragment.showActionButton();
-            mFragment.mFloatingActionButton.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                    MainActivity.activity.startActivity(browserIntent);
-                }
-            });
         }
+        mFragment.mFloatingActionButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                MainActivity.activity.startActivity(browserIntent);
+            }
+        });
         super.onLayout(changed, left, top, right, bottom);
     }
 
