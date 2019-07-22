@@ -6,4 +6,6 @@
 
     <color name="showcase_background_color">#93ff40</color>
     <color name="showcase_text_color">#000000</color>
+
+    <color name="thumb_clicked">#E7B41B</color>
 </resources>
