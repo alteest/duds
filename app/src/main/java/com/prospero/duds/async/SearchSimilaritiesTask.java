@@ -71,12 +71,14 @@ public class SearchSimilaritiesTask extends HttpTask { //AsyncTask<BoxFragment, 
         wr.writeBytes(crlf);
 
         // Upload test value
+        /*
         wr.writeBytes(twoHyphens + boundary + crlf);
         wr.writeBytes("Content-Disposition: form-data; name=\"test\"" + crlf);
         wr.writeBytes("Content-Type: text/plain" + crlf);
         wr.writeBytes(crlf);
         wr.writeBytes(Boolean.toString(true));
         wr.writeBytes(crlf);
+        */
 
         wr.writeBytes(twoHyphens + boundary + twoHyphens + crlf);
 
@@ -90,7 +92,7 @@ public class SearchSimilaritiesTask extends HttpTask { //AsyncTask<BoxFragment, 
             try {
                 SimilarFragment fragment = new SimilarFragment();
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("array", jsonResponse.getJSONArray(0).toString());
+                bundle.putSerializable("array", jsonResponse.getJSONObject(0).toString());
                 fragment.setArguments(bundle);
                 MainActivity.activity.setFragment(fragment);
             } catch (JSONException e) {

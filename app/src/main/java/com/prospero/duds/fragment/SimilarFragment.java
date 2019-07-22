@@ -13,13 +13,14 @@ import com.prospero.duds.view.SimilarView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 @SuppressLint("ValidFragment")
 public class SimilarFragment extends BaseFragment {
 
-    private JSONArray jsonArray = null;
+    private JSONObject jsonObject = null;
 
     public SimilarFragment() {
         super();
@@ -29,7 +30,7 @@ public class SimilarFragment extends BaseFragment {
     public void setArguments(Bundle bundle) {
         super.setArguments(bundle);
         try {
-            jsonArray = new JSONArray(bundle.getString("array"));
+            jsonObject = new JSONObject(bundle.getString("array"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -63,14 +64,20 @@ public class SimilarFragment extends BaseFragment {
     @Override
     protected ArrayList<View> getViews() {
         ArrayList<View> views = new ArrayList<>();
-        for (int i = 0; i < jsonArray.length(); i++) {
+        try {
+            String uuid = jsonObject.getString("request");
+            JSONArray data = jsonObject.getJSONArray("data");
+            for (int i = 0; i < data.length(); i++) {
             try {
                 SimilarView view = new SimilarView(this);
-                view.setData(jsonArray.getJSONObject(i));
+                view.setData(uuid, data.getJSONObject(i));
                 views.add(view);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
         return views;
     }
