@@ -19,11 +19,7 @@ public abstract class UploadView extends BaseView {
     }
 
     @Override
-    protected void onLayout (boolean changed,
-                             int left,
-                             int top,
-                             int right,
-                             int bottom) {
+    public void setActive() {
         if (getFilepath() == null) {
             selectImage();
         }
@@ -33,7 +29,7 @@ public abstract class UploadView extends BaseView {
                 doSearch();
             }
         });
-        super.onLayout(changed, left, top, right, bottom);
+        super.setActive();
     }
 
     protected abstract void selectImage();

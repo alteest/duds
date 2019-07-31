@@ -56,14 +56,8 @@ public class SimilarView extends BaseView {
     }
 
     @Override
-    protected void onLayout (boolean changed,
-                             int left,
-                             int top,
-                             int right,
-                             int bottom) {
-        if (changed) {
-            mFragment.showActionButton();
-        }
+    public void setActive() {
+        mFragment.showActionButton();
         mFragment.mFloatingActionButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,7 +65,7 @@ public class SimilarView extends BaseView {
                 MainActivity.activity.startActivity(browserIntent);
             }
         });
-        super.onLayout(changed, left, top, right, bottom);
+        super.setActive();
     }
 
     @Override

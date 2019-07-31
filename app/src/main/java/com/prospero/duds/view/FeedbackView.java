@@ -31,15 +31,9 @@ public class FeedbackView extends BaseView {
     }
 
     @Override
-    protected void onLayout (boolean changed,
-                             int left,
-                             int top,
-                             int right,
-                             int bottom) {
-        if (changed) {
-            mFragment.hideActionButton();
-        }
-        super.onLayout(changed, left, top, right, bottom);
+    public void setActive() {
+        mFragment.hideActionButton();
+        super.setActive();
     }
 
     @Override

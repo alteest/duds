@@ -9,6 +9,9 @@ import java.util.ArrayList;
 public class StartupFragment extends BaseFragment {
 
     @Override
+    protected void setActiveView(int position) {};
+
+    @Override
     protected ArrayList<View> getViews() {
         ArrayList<View> views = new ArrayList<>();
         views.add(new StartupView(this.getContext()));
