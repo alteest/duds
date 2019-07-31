@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static MainActivity activity;
     //public static String baseUrl = "http://52.166.124.125/review/";
-    public static String baseUrl = "http://134.209.204.54/api_dev/";
+    public static String baseUrl = "http://134.209.204.54/api/";
 
     private FileCache mFileCache;
 

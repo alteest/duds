@@ -52,6 +52,7 @@ public abstract class UploadView extends BaseView {
         mImageButton.setImageBitmap((BitmapFactory.decodeFile(filepath)));
 
         mFragment.showActionButton();
+        doSearch();
     }
 
     private void doSearch() {
