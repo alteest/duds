@@ -26,10 +26,11 @@ public abstract class BaseView extends RelativeLayout {
 
     protected abstract int getLayoutResource();
 
+    public void setActive() {};
+
     public void setFilepath(String filepath) {
         mFilepath = filepath;
     }
-
     public String getFilepath() {
         return mFilepath;
     }

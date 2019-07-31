@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 
 import com.prospero.duds.MainActivity;
 import com.prospero.duds.R;
+import com.prospero.duds.view.BaseView;
 
 import java.util.ArrayList;
 
@@ -45,6 +46,11 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
+    protected void setActiveView(int position) {
+        BaseView view = (BaseView) views.get(position);
+        view.setActive();
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,8 +68,10 @@ public abstract class BaseFragment extends Fragment {
 
             public void onPageSelected(int position) {
                 toggleNavigationVisibility(position);
+                setActiveView(position);
             }
         });
+
         mDotsTabLayout = rootView.findViewById(R.id.dots_tab_layout);
         mDotsTabLayout.setupWithViewPager(mViewPager, true);
         if (views.size() > 4) {
@@ -107,6 +115,8 @@ public abstract class BaseFragment extends Fragment {
         mFloatingActionButton.bringToFront();
 
         toggleNavigationVisibility(mViewPager.getCurrentItem());
+
+        setActiveView(0);
 
         return rootView;
     }

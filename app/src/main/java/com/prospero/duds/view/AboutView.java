@@ -13,19 +13,13 @@ public class AboutView extends BaseView {
     }
 
     @Override
-    protected void onLayout (boolean changed,
-                             int left,
-                             int top,
-                             int right,
-                             int bottom) {
-        if (changed) {
-            mFragment.hideActionButton();
-            TextView aboutText = findViewById(R.id.about_text);
-            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) aboutText.getLayoutParams();
-            layoutParams.topMargin = getHeight() / 3;
-            aboutText.setLayoutParams(layoutParams);
-        }
-        super.onLayout(changed, left, top, right, bottom);
+    public void setActive() {
+        mFragment.hideActionButton();
+        TextView aboutText = findViewById(R.id.about_text);
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) aboutText.getLayoutParams();
+        layoutParams.topMargin = getHeight() / 3;
+        aboutText.setLayoutParams(layoutParams);
+        super.setActive();
     }
 
     @Override
